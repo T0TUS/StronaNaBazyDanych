@@ -1,34 +1,504 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
-  <title>Chowany Panel</title>
-</head>
-<body>
-  <header>
-    <div class="logo">Twoje Logo</div>
-    <div class="search-bar">
-      <input type="text" placeholder="Wyszukaj...">
-      <button type="button">Szukaj</button>
-    </div>
-  </header>
-
-  <div class="main-content">
-    <!-- Treść strony -->
-  </div>
-
-  <div class="side-panel">
-    <button id="toggle-btn">☰</button>
-    <div class="panel-content">
-        <ul>
-            <li>Coffee</li>
-            <li>Tea</li>
-            <li>Milk</li>
-        </ul>
-    </div>
-  </div>
-</body>
 </html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SteamDB</title>
+    <link rel="preload" href="fonts\Inter-Regular.woff2?v=4.0" as="font" type="font/woff2" crossorigin="">
+    <link rel="preload" href="fonts\Inter-Bold.woff2?v=4.0" as="font" type="font/woff2" crossorigin="">
+    <link rel="preload" href="fonts\Inter-Italic.woff2?v=4.0" as="font" type="font/woff2" crossorigin="">
+    <link rel="stylesheet"  href="css\headcrab.css">
+    <link rel="stylesheet"  href="css\index.css">
+    <!--<link rel="alternate" type="application/rss+xml" title="SkinDB Blog" href="https://steamdb.info/api/BlogRSS/">-->
+    
+    <meta property="og:title" content="SkinDB">
+    <meta name="description" content="SkinDB is a database of skins in CS2.">
+    <meta property="og:description" content="SkinDB is a database of skins in CS2.">
+    <meta property="og:image" href="/png/logo.png"> <!--content="https://preview.redd.it/when-i-saw-the-new-cs2-logo-this-instantly-came-to-my-mind-v0-kenzj6pcmjpa1.jpg">-->
+    <meta name="theme-color" content="#000000">
+    <!--<link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="SteamDB">-->
+</head>
+<body class="page-home">
+    <a class="skip-main" href="#main" id="js-skip-main">Skip to content</a>
+    <div class="header" role="banner">
+    <div class="header-navbar">
+    <a href="png\SteamDBlogo.png" class="header-brand" itemprop="url"><svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 300 300" version="1.1"><path d="M 144.287 44.740 C 147.469 44.939, 152.419 44.937, 155.287 44.736 C 158.154 44.535, 155.550 44.372, 149.500 44.374 C 143.450 44.376, 141.104 44.541, 144.287 44.740 M 127.250 45.689 C 128.213 45.941, 129.787 45.941, 130.750 45.689 C 131.713 45.438, 130.925 45.232, 129 45.232 C 127.075 45.232, 126.287 45.438, 127.250 45.689 M 168.762 45.707 C 170.006 45.946, 171.806 45.937, 172.762 45.687 C 173.718 45.437, 172.700 45.241, 170.500 45.252 C 168.300 45.263, 167.518 45.468, 168.762 45.707 M 118.750 46.662 C 119.438 46.940, 120.563 46.940, 121.250 46.662 C 121.938 46.385, 121.375 46.158, 120 46.158 C 118.625 46.158, 118.063 46.385, 118.750 46.662 M 177.750 46.662 C 178.438 46.940, 179.563 46.940, 180.250 46.662 C 180.938 46.385, 180.375 46.158, 179 46.158 C 177.625 46.158, 177.063 46.385, 177.750 46.662 M 184.750 47.662 C 185.438 47.940, 186.563 47.940, 187.250 47.662 C 187.938 47.385, 187.375 47.158, 186 47.158 C 184.625 47.158, 184.063 47.385, 184.750 47.662 M 72 60 C 70.075 61.054, 68.950 61.916, 69.500 61.916 C 70.050 61.916, 72.075 61.054, 74 60 C 75.925 58.946, 77.050 58.084, 76.500 58.084 C 75.950 58.084, 73.925 58.946, 72 60 M 231 62.430 C 231 62.705, 231.900 63.411, 233 64 C 234.100 64.589, 235 64.845, 235 64.570 C 235 64.295, 234.100 63.589, 233 63 C 231.900 62.411, 231 62.155, 231 62.430 M 63.441 64.555 C 61.577 66.049, 61.589 66.067, 63.750 65.020 C 64.987 64.420, 66 63.720, 66 63.465 C 66 62.700, 65.481 62.921, 63.441 64.555 M 241.500 70 C 242.495 71.100, 243.535 72, 243.810 72 C 244.085 72, 243.495 71.100, 242.500 70 C 241.505 68.900, 240.465 68, 240.190 68 C 239.915 68, 240.505 68.900, 241.500 70 M 54.405 71.250 L 52.500 73.500 54.750 71.595 C 55.987 70.547, 57 69.535, 57 69.345 C 57 68.545, 56.195 69.136, 54.405 71.250 M 102.998 98.188 C 102.999 98.566, 107.951 99.016, 114.002 99.188 C 120.053 99.359, 125.003 99.191, 125.002 98.812 C 125.001 98.434, 120.049 97.984, 113.998 97.812 C 107.947 97.641, 102.997 97.809, 102.998 98.188 M 135.789 98.741 C 139.248 98.937, 144.648 98.936, 147.789 98.738 C 150.930 98.540, 148.100 98.380, 141.500 98.382 C 134.900 98.384, 132.330 98.546, 135.789 98.741 M 244.946 114.750 L 241.500 118.500 245.250 115.054 C 247.313 113.158, 249 111.471, 249 111.304 C 249 110.540, 248.154 111.260, 244.946 114.750 M 51 115.500 C 52.866 117.425, 54.617 119, 54.892 119 C 55.167 119, 53.866 117.425, 52 115.500 C 50.134 113.575, 48.383 112, 48.108 112 C 47.833 112, 49.134 113.575, 51 115.500 M 59.100 128.295 C 57.835 130.402, 57.857 130.423, 59.579 128.774 C 60.570 127.824, 61.166 126.832, 60.903 126.569 C 60.640 126.306, 59.829 127.083, 59.100 128.295 M 53.437 133.250 L 50.500 136.500 53.750 133.563 C 56.779 130.825, 57.460 130, 56.687 130 C 56.515 130, 55.052 131.463, 53.437 133.250 M 243 130.313 C 243 130.485, 244.463 131.948, 246.250 133.563 L 249.500 136.500 246.563 133.250 C 243.825 130.221, 243 129.540, 243 130.313 M 115.750 140.662 C 116.438 140.940, 117.563 140.940, 118.250 140.662 C 118.938 140.385, 118.375 140.158, 117 140.158 C 115.625 140.158, 115.063 140.385, 115.750 140.662 M 181.750 140.662 C 182.438 140.940, 183.563 140.940, 184.250 140.662 C 184.938 140.385, 184.375 140.158, 183 140.158 C 181.625 140.158, 181.063 140.385, 181.750 140.662 M 122.750 141.662 C 123.438 141.940, 124.563 141.940, 125.250 141.662 C 125.938 141.385, 125.375 141.158, 124 141.158 C 122.625 141.158, 122.063 141.385, 122.750 141.662 M 174.269 141.693 C 175.242 141.947, 176.592 141.930, 177.269 141.656 C 177.946 141.382, 177.150 141.175, 175.500 141.195 C 173.850 141.215, 173.296 141.439, 174.269 141.693 M 133.264 142.718 C 134.784 142.947, 137.034 142.941, 138.264 142.704 C 139.494 142.467, 138.250 142.279, 135.500 142.286 C 132.750 142.294, 131.744 142.488, 133.264 142.718 M 161.264 142.718 C 162.784 142.947, 165.034 142.941, 166.264 142.704 C 167.494 142.467, 166.250 142.279, 163.500 142.286 C 160.750 142.294, 159.744 142.488, 161.264 142.718 M 44.252 152.500 C 44.263 154.700, 44.468 155.482, 44.707 154.238 C 44.946 152.994, 44.937 151.194, 44.687 150.238 C 44.437 149.282, 44.241 150.300, 44.252 152.500 M 255.252 152.500 C 255.263 154.700, 255.468 155.482, 255.707 154.238 C 255.946 152.994, 255.937 151.194, 255.687 150.238 C 255.437 149.282, 255.241 150.300, 255.252 152.500 M 79 154.313 C 79 154.485, 80.463 155.948, 82.250 157.563 L 85.500 160.500 82.563 157.250 C 79.825 154.221, 79 153.540, 79 154.313 M 217.437 157.250 L 214.500 160.500 217.750 157.563 C 220.779 154.825, 221.460 154, 220.687 154 C 220.515 154, 219.052 155.463, 217.437 157.250 M 53 171.500 C 54.292 172.875, 55.574 174, 55.849 174 C 56.124 174, 55.292 172.875, 54 171.500 C 52.708 170.125, 51.426 169, 51.151 169 C 50.876 169, 51.708 170.125, 53 171.500 M 245.924 171.750 L 243.500 174.500 246.250 172.076 C 247.762 170.742, 249 169.505, 249 169.326 C 249 168.541, 248.190 169.180, 245.924 171.750 M 121.750 174.662 C 122.438 174.940, 123.563 174.940, 124.250 174.662 C 124.938 174.385, 124.375 174.158, 123 174.158 C 121.625 174.158, 121.063 174.385, 121.750 174.662 M 175.750 174.662 C 176.438 174.940, 177.563 174.940, 178.250 174.662 C 178.938 174.385, 178.375 174.158, 177 174.158 C 175.625 174.158, 175.063 174.385, 175.750 174.662 M 128.750 175.662 C 129.438 175.940, 130.563 175.940, 131.250 175.662 C 131.938 175.385, 131.375 175.158, 130 175.158 C 128.625 175.158, 128.063 175.385, 128.750 175.662 M 168.750 175.662 C 169.438 175.940, 170.563 175.940, 171.250 175.662 C 171.938 175.385, 171.375 175.158, 170 175.158 C 168.625 175.158, 168.063 175.385, 168.750 175.662 M 139.750 176.723 C 141.537 176.945, 144.463 176.945, 146.250 176.723 C 148.037 176.502, 146.575 176.320, 143 176.320 C 139.425 176.320, 137.963 176.502, 139.750 176.723 M 153.750 176.723 C 155.537 176.945, 158.463 176.945, 160.250 176.723 C 162.037 176.502, 160.575 176.320, 157 176.320 C 153.425 176.320, 151.963 176.502, 153.750 176.723 M 120.269 197.693 C 121.242 197.947, 122.592 197.930, 123.269 197.656 C 123.946 197.382, 123.150 197.175, 121.500 197.195 C 119.850 197.215, 119.296 197.439, 120.269 197.693 M 177.269 197.693 C 178.242 197.947, 179.592 197.930, 180.269 197.656 C 180.946 197.382, 180.150 197.175, 178.500 197.195 C 176.850 197.215, 176.296 197.439, 177.269 197.693 M 129.762 198.707 C 131.006 198.946, 132.806 198.937, 133.762 198.687 C 134.718 198.437, 133.700 198.241, 131.500 198.252 C 129.300 198.263, 128.518 198.468, 129.762 198.707 M 166.762 198.707 C 168.006 198.946, 169.806 198.937, 170.762 198.687 C 171.718 198.437, 170.700 198.241, 168.500 198.252 C 166.300 198.263, 165.518 198.468, 166.762 198.707 M 44.252 208.500 C 44.263 210.700, 44.468 211.482, 44.707 210.238 C 44.946 208.994, 44.937 207.194, 44.687 206.238 C 44.437 205.282, 44.241 206.300, 44.252 208.500 M 255.252 208.500 C 255.263 210.700, 255.468 211.482, 255.707 210.238 C 255.946 208.994, 255.937 207.194, 255.687 206.238 C 255.437 205.282, 255.241 206.300, 255.252 208.500 M 82 213.500 C 83.866 215.425, 85.617 217, 85.892 217 C 86.167 217, 84.866 215.425, 83 213.500 C 81.134 211.575, 79.383 210, 79.108 210 C 78.833 210, 80.134 211.575, 82 213.500 M 216.946 213.750 L 213.500 217.500 217.250 214.054 C 220.740 210.846, 221.460 210, 220.696 210 C 220.529 210, 218.842 211.688, 216.946 213.750 M 53.500 228 C 55.648 230.200, 57.631 232, 57.906 232 C 58.181 232, 56.648 230.200, 54.500 228 C 52.352 225.800, 50.369 224, 50.094 224 C 49.819 224, 51.352 225.800, 53.500 228 M 245.453 228.250 L 241.500 232.500 245.750 228.547 C 248.088 226.373, 250 224.460, 250 224.297 C 250 223.540, 249.129 224.298, 245.453 228.250 M 126.750 231.662 C 127.438 231.940, 128.563 231.940, 129.250 231.662 C 129.938 231.385, 129.375 231.158, 128 231.158 C 126.625 231.158, 126.063 231.385, 126.750 231.662 M 170.750 231.662 C 171.438 231.940, 172.563 231.940, 173.250 231.662 C 173.938 231.385, 173.375 231.158, 172 231.158 C 170.625 231.158, 170.063 231.385, 170.750 231.662 M 135.750 232.706 C 136.988 232.944, 139.012 232.944, 140.250 232.706 C 141.488 232.467, 140.475 232.272, 138 232.272 C 135.525 232.272, 134.512 232.467, 135.750 232.706 M 159.750 232.706 C 160.988 232.944, 163.012 232.944, 164.250 232.706 C 165.488 232.467, 164.475 232.272, 162 232.272 C 159.525 232.272, 158.512 232.467, 159.750 232.706 M 111.750 252.662 C 112.438 252.940, 113.563 252.940, 114.250 252.662 C 114.938 252.385, 114.375 252.158, 113 252.158 C 111.625 252.158, 111.063 252.385, 111.750 252.662 M 185.750 252.662 C 186.438 252.940, 187.563 252.940, 188.250 252.662 C 188.938 252.385, 188.375 252.158, 187 252.158 C 185.625 252.158, 185.063 252.385, 185.750 252.662 M 118.750 253.662 C 119.438 253.940, 120.563 253.940, 121.250 253.662 C 121.938 253.385, 121.375 253.158, 120 253.158 C 118.625 253.158, 118.063 253.385, 118.750 253.662 M 178.750 253.662 C 179.438 253.940, 180.563 253.940, 181.250 253.662 C 181.938 253.385, 181.375 253.158, 180 253.158 C 178.625 253.158, 178.063 253.385, 178.750 253.662 M 127.250 254.689 C 128.213 254.941, 129.787 254.941, 130.750 254.689 C 131.713 254.438, 130.925 254.232, 129 254.232 C 127.075 254.232, 126.287 254.438, 127.250 254.689 M 169.250 254.689 C 170.213 254.941, 171.787 254.941, 172.750 254.689 C 173.713 254.438, 172.925 254.232, 171 254.232 C 169.075 254.232, 168.287 254.438, 169.250 254.689 M 144.250 255.739 C 147.412 255.937, 152.588 255.937, 155.750 255.739 C 158.912 255.541, 156.325 255.378, 150 255.378 C 143.675 255.378, 141.088 255.541, 144.250 255.739" stroke="none" fill="#8d8d8e" fill-rule="evenodd"/><path d="M 125 46.058 C 90.244 50.346, 59.152 63.522, 47.999 78.687 C 44.215 83.833, 42 90.027, 42 95.466 C 42 103.755, 49.502 114.739, 60.529 122.598 L 63.474 124.696 56.292 131.598 C 48.081 139.489, 45.044 145.133, 45.044 152.500 C 45.044 161.170, 50.068 169.209, 60.081 176.559 C 62.786 178.545, 64.988 180.470, 64.974 180.835 C 64.960 181.201, 62.674 183.043, 59.894 184.929 C 32.204 203.718, 44.208 231.558, 85.964 245.389 C 125.054 258.337, 174.946 258.337, 214.036 245.389 C 255.755 231.570, 267.772 203.701, 240.106 184.929 C 237.326 183.043, 235.040 181.201, 235.026 180.835 C 235.012 180.470, 237.214 178.545, 239.919 176.559 C 253.963 166.250, 258.368 154.152, 252.422 142.219 C 249.896 137.150, 242.562 129.627, 236.868 126.263 C 235.291 125.331, 234 124.237, 234 123.832 C 234 123.427, 235.938 121.763, 238.307 120.133 C 248.802 112.912, 255.550 101.648, 254.800 92.602 C 253.079 71.853, 226.005 54.584, 184 47.441 C 172.761 45.531, 136.218 44.673, 125 46.058 M 105.881 78.503 C 103.272 79.921, 102.488 81.232, 97.585 92.374 C 92.663 103.560, 94.114 105, 110.303 105 L 121.949 105 123.474 102.050 C 124.313 100.427, 125 98.852, 125 98.550 C 125 98.247, 120.275 98, 114.500 98 C 108.725 98, 104 97.606, 104 97.124 C 104 96.643, 105.093 93.776, 106.430 90.754 C 108.236 86.670, 108.570 84.970, 107.730 84.130 C 106.890 83.290, 109.819 83, 119.139 83 C 131.606 83, 131.686 82.985, 132.839 80.453 C 133.478 79.052, 134 77.702, 134 77.453 C 134 77.204, 128.262 77.018, 121.250 77.040 C 112.181 77.069, 107.744 77.491, 105.881 78.503 M 139.209 78.566 C 136.841 80.225, 133 86.920, 133 89.389 C 133 92.902, 135.893 94, 145.145 94 C 153.179 94, 154.111 94.188, 153.812 95.750 C 153.522 97.265, 152.066 97.533, 142.988 97.747 C 137.220 97.883, 131.565 98.210, 130.421 98.473 C 128.730 98.863, 126 102.613, 126 104.547 C 126 104.796, 132.097 105, 139.550 105 C 155.614 105, 157.723 104.249, 160.954 97.373 C 162.717 93.624, 162.951 92.189, 162.105 90.332 C 161.101 88.127, 160.524 88, 151.521 88 C 142.805 88, 142 87.838, 142 86.083 C 142 85.029, 141.438 83.940, 140.750 83.662 C 140.063 83.385, 145.676 83.122, 153.224 83.079 L 166.949 83 168.500 80 L 170.051 77 155.748 77 C 144.384 77, 140.986 77.322, 139.209 78.566 M 172.161 79.547 C 171.522 80.948, 171 82.298, 171 82.547 C 171 82.796, 176.646 83, 183.547 83 L 196.093 83 194.297 85.447 C 192.589 87.774, 191.907 87.910, 180.513 88.197 L 168.526 88.500 166.401 93 C 163.031 100.138, 162.765 101.622, 164.537 103.395 C 165.852 104.709, 168.574 105, 179.546 105 L 192.949 105 194.500 102 L 196.051 99 184.026 99 C 177.412 99, 172 98.745, 172 98.434 C 172 98.123, 172.466 96.998, 173.035 95.934 C 173.965 94.197, 175.222 94, 185.380 94 C 197.902 94, 198.022 93.945, 201.290 86.716 C 203.405 82.035, 203.430 80.573, 201.429 78.571 C 200.158 77.301, 197.318 77, 186.589 77 C 173.342 77, 173.319 77.004, 172.161 79.547 M 76 138.433 C 76 149.851, 77.604 153.921, 84.226 159.297 C 113.161 182.790, 186.839 182.790, 215.774 159.297 C 222.378 153.935, 224 149.841, 224 138.540 C 224 133.293, 223.887 129, 223.750 129 C 223.613 129, 219.087 130.578, 213.693 132.506 C 172.990 147.055, 118.957 145.853, 77.750 129.481 C 76.156 128.848, 76 129.647, 76 138.433 M 76.159 196.410 C 76.483 206.314, 76.650 207.007, 79.590 210.660 C 86.511 219.260, 100.198 226.093, 118.868 230.271 C 127.098 232.113, 131.630 232.426, 150 232.426 C 168.370 232.426, 172.902 232.113, 181.132 230.271 C 199.802 226.093, 213.489 219.260, 220.410 210.660 C 223.356 206.999, 223.516 206.329, 223.845 196.267 C 224.125 187.718, 223.934 185.811, 222.841 186.231 C 181.204 202.208, 125.587 203.097, 83.677 188.455 C 79.813 187.105, 76.464 186, 76.235 186 C 76.005 186, 75.971 190.685, 76.159 196.410" stroke="none" fill="#fbfbfb" fill-rule="evenodd"/></svg> <span>SkinDB</span></a>
+    <form class="header-search" id="js-header-form" method="get" action="/search/" itemprop="potentialAction" itemscope="" itemtype="http://schema.org/SearchAction" role="search">
+    <input type="hidden" name="a" value="all">
+    <meta itemprop="target" content="https://steamdb.info/search/?a=all&amp;q={q}">
+    <input type="text" accesskey="/" class="field" autocomplete="off" name="q" placeholder="Search…" itemprop="query-input" aria-label="Search">
+    <button type="submit" class="submit" aria-label="Perform search" tabindex="-1"><svg width="16" height="16" viewBox="0 0 16 16" class="octicon octicon-search" aria-hidden="true"><path d="M10.68 11.74a6 6 0 0 1-7.922-8.982 6 6 0 0 1 8.982 7.922l3.04 3.04a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215ZM11.5 7a4.499 4.499 0 1 0-8.997 0A4.499 4.499 0 0 0 11.5 7Z"></path></svg></button>
+    </form>
+    <a href="/sales/">Sales</a>
+    <a href="/charts/">Charts</a>
+    <a href="/calculator/">Calculator</a>
+    <a href="/calendar/">Calendar</a>
+    <a href="/patchnotes/">Patches</a>
+    <a href="/discord/">Discord</a>
+    <a href="/instantsearch/">Find games</a>
+    <button type="button" class="btn btn-outline header-search-close">Close</button>
+    </div>
+    <button type="button" class="header-search-mobile" aria-label="Open search"><svg width="24" height="24" viewBox="0 0 16 16" class="octicon octicon-search" aria-hidden="true"><path d="M10.68 11.74a6 6 0 0 1-7.922-8.982 6 6 0 0 1 8.982 7.922l3.04 3.04a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215ZM11.5 7a4.499 4.499 0 1 0-8.997 0A4.499 4.499 0 0 0 11.5 7Z"></path></svg></button>
+    <div class="header-user hide-small">
+    <a class="header-login" href="/login/" rel="nofollow">
+    <svg width="20" height="20" viewBox="0 0 16 16" class="octicon octicon-steam" aria-hidden="true"><path d="M8 0a8 8 0 00-8 7.47c.07.1.13.21.18.32l4.15 1.67a2.2 2.2 0 011.31-.36l1.97-2.8v-.04c0-1.65 1.37-3 3.05-3a3.03 3.03 0 013.05 3 3.03 3.03 0 01-3.12 3l-2.81 1.97c0 .3-.05.6-.17.9a2.25 2.25 0 01-4.23-.37L.4 10.56A8.01 8.01 0 108 0zm2.66 4.27c-1.12 0-2.03.9-2.03 2s.91 1.99 2.03 1.99c1.12 0 2.03-.9 2.03-2s-.9-2-2.03-2zm0 .5c.85 0 1.53.66 1.53 1.49s-.68 1.5-1.53 1.5c-.84 0-1.52-.67-1.52-1.5s.68-1.5 1.52-1.5zM5.57 9.6c-.22 0-.43.04-.62.11l1.02.42c.65.26.95.99.68 1.62-.27.63-1 .93-1.65.67l-1-.4a1.73 1.73 0 003.13-.08c.18-.42.18-.88.01-1.3A1.69 1.69 0 005.57 9.6z"></path></svg> <span>Sign in</span>
+    </a>
+    </div>
+    </div>
+    <div class="header-search-suggestions">
+    <div class="container" id="js-search-tips">
+    <p>Start typing to see game suggestions. This only suggests apps that have a store page.</p>
+    <ul>
+    <li class="hide-small">Use slash key (<kbd>/</kbd>) to focus search from anywhere.</li>
+    <li class="hide-small">Use arrow keys (<kbd>↑</kbd> and <kbd>↓</kbd>) to navigate suggestions.</li>
+    <li class="hide-small">Use escape (<kbd>Esc</kbd>) to close search.</li>
+    <li>Enter an appid to be redirected to the app page.</li>
+    <li>Enter a steamid (765...) to be redirected to calculator.</li>
+    <li>Paste a profile link (/id/ or /profiles/) to be redirected to calculator.</li>
+    <li>Paste any url that contains app/, sub/, bundle/, or depot/ to be redirected to the relevant page.</li>
+    <li><a href="https://www.algolia.com/?utm_content=steamdb.info&amp;utm_campaign=poweredby">Search is powered by Algolia.</a></li>
+    </ul>
+    </div>
+    <div class="container" id="js-search-suggestions"></div>
+    <div class="container header-search-enter">
+    Only apps with a store page are suggested.
+    <span class="hide-small">
+    <kbd>Enter</kbd> Submit to view all results.
+    <kbd>Ctrl+Enter</kbd> View and filter in instant search.
+    </span>
+    </div>
+    <div class="header-search-side-close">
+    <div class="header-search-side-close-inner">Close ×</div>
+    </div>
+    </div>
+    <div class="header-menu-container" hidden="">
+    <div class="header-menu" tabindex="0">
+    <ul>
+    <li class="navigation-heading"><svg width="16" height="16" viewBox="0 0 16 16" class="octicon octicon-info" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg> About</li>
+    <li><a href="/blog/">Blog</a></li>
+    <li><a href="/discord/">Discord</a></li>
+    <li><a href="/discord/bot/">Discord Bot</a></li>
+    <li><a href="/faq/">FAQ &amp; help</a></li>
+    <li><a href="/donate/">Donate &amp; contribute</a></li>
+    <li><a href="/extension/">Browser extension</a></li>
+    </ul>
+    <ul>
+    <li class="navigation-heading"><svg width="16" height="16" viewBox="0 0 16 16" class="octicon octicon-search" aria-hidden="true"><path d="M10.68 11.74a6 6 0 0 1-7.922-8.982 6 6 0 0 1 8.982 7.922l3.04 3.04a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215ZM11.5 7a4.499 4.499 0 1 0-8.997 0A4.499 4.499 0 0 0 11.5 7Z"></path></svg> Tools</li>
+    <li><a href="/sales/">Sales</a></li>
+    <li><a href="/charts/">Charts</a></li>
+    <li><a href="/calculator/">Calculator</a></li>
+    <li><a href="/patchnotes/">Patch notes</a></li>
+    <li><a href="/search/">Search</a></li>
+    <li><a href="/instantsearch/">Instant search</a></li>
+    <li><a href="/sales/history/">When is next sale?</a></li>
+    </ul>
+    <ul>
+    <li class="navigation-heading"><svg width="16" height="16" viewBox="0 0 16 16" class="octicon octicon-sync" aria-hidden="true"><path d="M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z"></path></svg> Tracking</li>
+    <li><a href="/apps/">Apps</a></li>
+    <li><a href="/subs/">Packages</a></li>
+    <li><a href="/bundles/">Bundles</a></li>
+    <li><a href="/history/">History</a></li>
+    <li><a href="/pricechanges/">Price changes</a></li>
+    <li><a href="/upcoming/free/">Free promotions</a></li>
+    <li><a href="/tech/">Technologies &amp; built with</a></li>
+    </ul>
+    <ul>
+    <li class="navigation-heading"><svg width="16" height="16" viewBox="0 0 16 16" class="octicon octicon-database" aria-hidden="true"><path d="M1 3.5c0-.626.292-1.165.7-1.59.406-.422.956-.767 1.579-1.041C4.525.32 6.195 0 8 0c1.805 0 3.475.32 4.722.869.622.274 1.172.62 1.578 1.04.408.426.7.965.7 1.591v9c0 .626-.292 1.165-.7 1.59-.406.422-.956.767-1.579 1.041C11.476 15.68 9.806 16 8 16c-1.805 0-3.475-.32-4.721-.869-.623-.274-1.173-.62-1.579-1.04-.408-.426-.7-.965-.7-1.591Zm1.5 0c0 .133.058.318.282.551.227.237.591.483 1.101.707C4.898 5.205 6.353 5.5 8 5.5c1.646 0 3.101-.295 4.118-.742.508-.224.873-.471 1.1-.708.224-.232.282-.417.282-.55 0-.133-.058-.318-.282-.551-.227-.237-.591-.483-1.101-.707C11.102 1.795 9.647 1.5 8 1.5c-1.646 0-3.101.295-4.118.742-.508.224-.873.471-1.1.708-.224.232-.282.417-.282.55Zm0 4.5c0 .133.058.318.282.551.227.237.591.483 1.101.707C4.898 9.705 6.353 10 8 10c1.646 0 3.101-.295 4.118-.742.508-.224.873-.471 1.1-.708.224-.232.282-.417.282-.55V5.724c-.241.15-.503.286-.778.407C11.475 6.68 9.805 7 8 7c-1.805 0-3.475-.32-4.721-.869a6.15 6.15 0 0 1-.779-.407Zm0 2.225V12.5c0 .133.058.318.282.55.227.237.592.484 1.1.708 1.016.447 2.471.742 4.118.742 1.647 0 3.102-.295 4.117-.742.51-.224.874-.47 1.101-.707.224-.233.282-.418.282-.551v-2.275c-.241.15-.503.285-.778.406-1.247.549-2.917.869-4.722.869-1.805 0-3.475-.32-4.721-.869a6.327 6.327 0 0 1-.779-.406Z"></path></svg> Database</li>
+    <li><a href="/tags/">User tags</a></li>
+    <li><a href="/calendar/">Release calendar</a></li>
+    <li><a href="/upcoming/">Upcoming releases</a></li>
+    <li><a href="/upcoming/mostfollowed/">Most followed upcoming</a></li>
+    <li><a href="/stats/releases/">Game releases by year</a></li>
+    <li><a href="/badges/">Profile badges</a></li>
+    <li><a href="/developers/">Developers</a></li>
+    <li><a href="/publishers/">Publishers</a></li>
+    </ul>
+    <ul>
+    <li class="navigation-heading"><svg width="16" height="16" viewBox="0 0 16 16" class="octicon octicon-number" aria-hidden="true"><path d="M9 4.75A.75.75 0 0 1 9.75 4h4a.75.75 0 0 1 .53 1.28l-1.89 1.892c.312.076.604.18.867.319.742.391 1.244 1.063 1.244 2.005 0 .653-.231 1.208-.629 1.627-.386.408-.894.653-1.408.777-1.01.243-2.225.063-3.124-.527a.751.751 0 0 1 .822-1.254c.534.35 1.32.474 1.951.322.306-.073.53-.201.67-.349.129-.136.218-.32.218-.596 0-.308-.123-.509-.444-.678-.373-.197-.98-.318-1.806-.318a.75.75 0 0 1-.53-1.28l1.72-1.72H9.75A.75.75 0 0 1 9 4.75Zm-3.587 5.763c-.35-.05-.77.113-.983.572a.75.75 0 1 1-1.36-.632c.508-1.094 1.589-1.565 2.558-1.425 1 .145 1.872.945 1.872 2.222 0 1.433-1.088 2.192-1.79 2.681-.308.216-.571.397-.772.573H7a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75c0-.69.3-1.211.67-1.61.348-.372.8-.676 1.15-.92.8-.56 1.18-.904 1.18-1.474 0-.473-.267-.69-.587-.737ZM5.604.089A.75.75 0 0 1 6 .75v4.77h.711a.75.75 0 0 1 0 1.5H3.759a.75.75 0 0 1 0-1.5H4.5V2.15l-.334.223a.75.75 0 0 1-.832-1.248l1.5-1a.75.75 0 0 1 .77-.037Z"></path></svg> Rankings</li>
+    <li><a href="/stats/gameratings/">Top rated games</a></li>
+    <li><a href="/badge/13/">Top game owners</a></li>
+    <li><a href="/stats/toplevels/">Top profile levels</a></li>
+    <li><a href="/stats/globaltopsellers/">Top selling games</a></li>
+    <li><a href="/topsellers/">Top selling games last week</a></li>
+    <li><a href="/stats/mostfollowed/">Most followed games</a></li>
+    <li><a href="/stats/mostwished/">Most wishlisted games</a></li>
+    </ul>
+    <ul>
+    <li class="navigation-heading"><svg width="16" height="16" viewBox="0 0 16 16" class="octicon octicon-person" aria-hidden="true"><path d="M10.561 8.073a6.005 6.005 0 0 1 3.432 5.142.75.75 0 1 1-1.498.07 4.5 4.5 0 0 0-8.99 0 .75.75 0 0 1-1.498-.07 6.004 6.004 0 0 1 3.431-5.142 3.999 3.999 0 1 1 5.123 0ZM10.5 5a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"></path></svg> Account</li>
+    <li><a href="/login/" rel="nofollow">Sign in via Steam</a></li>
+    <li><a href="/freepackages/">Free packages</a></li>
+    <li>&nbsp;</li>
+    <li><a href="https://steamstat.us/">Steam Status</a></li>
+    <li><a href="https://steamapi.xpaw.me/">Steam Web API</a></li>
+    </ul>
+    <div class="header-disclaimer">SteamDB is a hobby project and is not affiliated with Valve or Steam.<br>All times on the site are UTC.</div>
+    <div class="header-kbd hide-small"><kbd>M</kbd> toggle this menu <kbd>/</kbd> focus search</div>
+    </div>
+    </div>
+    <script nonce="" integrity="sha512-M8pZpAX4Jt1XhcxH/ALYK2SUtvIDWa1OjjBY1D1ZijLPaEuE/6aUavMSxQhO8MoyKNtmUqvEfSm+VjtQ5i6CXw==" src="/static/js/hover.js?v=33ca59a405f826dd" defer=""></script>
+    <script nonce="" integrity="sha512-1ybGGSXu45WDVLpQVF82WqtnS2bxLx/FPHJTns9Vs3s6fB+Z9IRphuQHYGo6iv2bFbVXVRuQ2xNJLdKPOMw+bw==" src="/static/js/toast.js?v=d726c61925eee395" defer=""></script>
+    <script nonce="" integrity="sha512-54Asi0fh+BQyjP2G5y135RRYrHtTIQJ8JG8I2hH/RB/PR76OwQKfCMave0EwftDgsk8ol/qmj/Q2phGg8kxf9A==" src="/static/js/footer.js?v=e7802c8b47e1f814" defer=""></script>
+    <script nonce="" integrity="sha512-wofNKUx6dsE2g1zlqh+SW79Ly6AVLf+lVyC3FbWs0bOd+dZh/nklj1kRWDgRBxQ9MYvQSHQ+Z+Wg0nyGfwYoPg==" src="/static/js/global.js?v=c287cd294c7a76c1"></script>
+    <div class="body-wrap">
+    <div class="body-content" id="main"><script nonce="" integrity="sha512-NO/kzezYPc6pX1+rDDDJgiCLhhmbRbQLssWh5jKQtPZM8KPQYaYferewqcWPr89dA9ucrJKBwl0KudwyempSnQ==" src="/static/js/vendor/diff_match_patch.js?v=34efe4cdecd83dce" defer=""></script>
+    <script nonce="" integrity="sha512-RK9HDvLjuaXQl6r+ZYQtUtoE/FYMf1iPtBRb5BiZqGlKDb8raWz8reUDbdADi6cXhACtXjbbnefuOxBYUFfW6w==" src="/static/js/timeago.js?v=44af470ef2e3b9a5" defer=""></script>
+    <script nonce="" integrity="sha512-sEnNOJhB7CZvsZ8+ry/Ee+fWT+SDWQxMaG7bPEVFDnTR9fliGX/IOiK30AZXkoHCCptQxguijGXWF11peD4riw==" src="/static/js/index.js?v=b049cd389841ec26" defer=""></script>
+    <div class="container container-hello">
+    <h1 class="header-title">Database of everything on Steam.</h1>
+    <div>
+    <p>This third-party website gives you better insight into the <a href="https://store.steampowered.com/">Steam</a> platform and everything in its database.</p>
+    <p><a href="/faq/" title="Frequently Asked Questions">Look through our frequently asked questions</a> to learn more about SteamDB, <a href="/discord/">join our Discord</a>.</p>
+    </div>
+    </div>
+    <div class="container container-products">
+    <div class="row">
+    
+    <div class="span6">
+    <table class="table-products table-hover">
+    <colgroup>
+    <col style="width:119px">
+    <col>
+    <col style="width:120px">
+    <col style="width:100px">
+    </colgroup>
+    <thead>
+    <tr>
+    <th class="table-title" colspan="2">Trending<span class="hide-small"> Games</span></th>
+    <th>Last 7 days</th>
+    <th>Players<span class="hide-small"> Now</span></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="app" data-appid="2426960" data-cache="1704906935">
+    <td class="applogo">
+    <a href="/app/2426960/charts/" tabindex="-1" aria-hidden="true">
+    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2426960/capsule_sm_120.jpg?t=1704906935" alt="">
+    </a>
+    </td>
+    <td>
+    <a href="/app/2426960/charts/" class="css-truncate">Summoners War</a>
+    <span class="green" title="New concurrent players max peak today"><svg width="16" height="16" viewBox="0 0 16 16" class="octicon octicon-flame" aria-hidden="true"><path d="M9.533.753V.752c.217 2.385 1.463 3.626 2.653 4.81C13.37 6.74 14.498 7.863 14.498 10c0 3.5-3 6-6.5 6S1.5 13.512 1.5 10c0-1.298.536-2.56 1.425-3.286.376-.308.862 0 1.035.454C4.46 8.487 5.581 8.419 6 8c.282-.282.341-.811-.003-1.5C4.34 3.187 7.035.75 8.77.146c.39-.137.726.194.763.607ZM7.998 14.5c2.832 0 5-1.98 5-4.5 0-1.463-.68-2.19-1.879-3.383l-.036-.037c-1.013-1.008-2.3-2.29-2.834-4.434-.322.256-.63.579-.864.953-.432.696-.621 1.58-.046 2.73.473.947.67 2.284-.278 3.232-.61.61-1.545.84-2.403.633a2.79 2.79 0 0 1-1.436-.874A3.198 3.198 0 0 0 3 10c0 2.53 2.164 4.5 4.998 4.5Z"></path></svg></span>
+    </td>
+    <td class="app-chart"><svg width="120" height="40" viewBox="0 0 42 100" preserveAspectRatio="none" aria-hidden="true"> <linearGradient x1="0" y1="0" x2="0" y2="1" id="graph-gradient">
+    <stop offset="0" stop-color="#c8ff00" stop-opacity="1"></stop>
+    <stop offset="1" stop-color="#414d19" stop-opacity="1"></stop>
+    </linearGradient><path fill="none" stroke="url(#graph-gradient)" stroke-width="2" vector-effect="non-scaling-stroke" d="M25 85.00L25 85.00L26 58.60L27 55.59L28 52.62L29 46.92L30 48.69L31 55.26L32 49.14L33 49.34L34 49.16L35 26.44L36 20.10L37 21.53L38 36.33L39 42.00L40 31.38L41 16.50L42 15.00"></path></svg></td>
+    <td class="text-center tabular-nums green">8,799</td>
+    </tr>
+    <tr class="app" data-appid="2495450" data-cache="1704874981">
+    <td class="applogo">
+    <a href="/app/2495450/charts/" tabindex="-1" aria-hidden="true">
+    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2495450/capsule_sm_120.jpg?t=1704874981" alt="">
+    </a>
+    </td>
+    <td>
+    <a href="/app/2495450/charts/" class="css-truncate">Winter Memories</a>
+    </td>
+    <td class="app-chart"><svg width="120" height="40" viewBox="0 0 42 100" preserveAspectRatio="none" aria-hidden="true"><path fill="none" stroke="url(#graph-gradient)" stroke-width="2" vector-effect="non-scaling-stroke" d="M13 85.00L13 85.00L14 54.15L15 33.81L16 30.82L17 15.00L18 15.23L19 50.96L20 49.26L21 28.53L22 28.22L23 19.74L24 22.39L25 61.95L26 60.18L27 48.70L28 44.45L29 26.96L30 29.44L31 65.83L32 63.16L33 52.98L34 49.19L35 31.37L36 33.54L37 67.36L38 65.26L39 56.15L40 52.59L41 37.00L42 38.88"></path></svg></td>
+    <td class="text-center tabular-nums green">3,381</td>
+    </tr>
+    <tr class="app" data-appid="601360" data-cache="1704903805">
+    <td class="applogo">
+    <a href="/app/601360/charts/" tabindex="-1" aria-hidden="true">
+    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/601360/capsule_sm_120.jpg?t=1704903805" alt="">
+    </a>
+    </td>
+    <td>
+    <a href="/app/601360/charts/" class="css-truncate">Portal: Revolution</a>
+    </td>
+    <td class="app-chart"><svg width="120" height="40" viewBox="0 0 42 100" preserveAspectRatio="none" aria-hidden="true"><path fill="none" stroke="url(#graph-gradient)" stroke-width="2" vector-effect="non-scaling-stroke" d="M17 85.00L17 85.00L18 42.81L19 33.65L20 38.14L21 48.41L22 38.51L23 22.59L24 15.00L25 15.36L26 39.26L27 52.34L28 53.17L29 39.64L30 25.46L31 25.80L32 45.71L33 54.25L34 55.20L35 41.20L36 29.10L37 29.22L38 47.70L39 56.29L40 58.97L41 44.67L42 32.77"></path></svg></td>
+    <td class="text-center tabular-nums green">5,583</td>
+    </tr>
+    <tr class="app" data-appid="2276930" data-cache="1704911240">
+    <td class="applogo">
+    <a href="/app/2276930/charts/" tabindex="-1" aria-hidden="true">
+    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2276930/capsule_sm_120.jpg?t=1704911240" alt="">
+    </a>
+    </td>
+    <td>
+    <a href="/app/2276930/charts/" class="css-truncate">Chillquarium</a>
+    <span class="green" title="New concurrent players max peak today"><svg width="16" height="16" viewBox="0 0 16 16" class="octicon octicon-flame" aria-hidden="true"><path d="M9.533.753V.752c.217 2.385 1.463 3.626 2.653 4.81C13.37 6.74 14.498 7.863 14.498 10c0 3.5-3 6-6.5 6S1.5 13.512 1.5 10c0-1.298.536-2.56 1.425-3.286.376-.308.862 0 1.035.454C4.46 8.487 5.581 8.419 6 8c.282-.282.341-.811-.003-1.5C4.34 3.187 7.035.75 8.77.146c.39-.137.726.194.763.607ZM7.998 14.5c2.832 0 5-1.98 5-4.5 0-1.463-.68-2.19-1.879-3.383l-.036-.037c-1.013-1.008-2.3-2.29-2.834-4.434-.322.256-.63.579-.864.953-.432.696-.621 1.58-.046 2.73.473.947.67 2.284-.278 3.232-.61.61-1.545.84-2.403.633a2.79 2.79 0 0 1-1.436-.874A3.198 3.198 0 0 0 3 10c0 2.53 2.164 4.5 4.998 4.5Z"></path></svg></span>
+    </td>
+    <td class="app-chart"><svg width="120" height="40" viewBox="0 0 42 100" preserveAspectRatio="none" aria-hidden="true"><path fill="none" stroke="url(#graph-gradient)" stroke-width="2" vector-effect="non-scaling-stroke" d="M0 84.71L0 84.71L1 84.31L2 83.88L3 83.92L4 84.19L5 83.64L6 83.42L7 83.04L8 82.87L9 83.23L10 84.17L11 83.45L12 83.49L13 83.80L14 83.25L15 83.88L16 84.59L17 84.02L18 83.68L19 83.52L20 83.32L21 83.57L22 83.95L23 83.80L24 84.05L25 84.09L26 84.17L27 84.17L28 85.00L29 84.78L30 83.28L31 77.76L32 67.93L33 63.51L34 56.67L35 47.77L36 44.03L37 42.14L38 32.64L39 30.87L40 22.17L41 15.00L42 17.32"></path></svg></td>
+    <td class="text-center tabular-nums green">4,228</td>
+    </tr>
+    <tr class="app" data-appid="383870" data-cache="1704846189">
+    <td class="applogo">
+    <a href="/app/383870/charts/" tabindex="-1" aria-hidden="true">
+    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/383870/capsule_sm_120.jpg?t=1704846189" alt="">
+    </a>
+    </td>
+    <td>
+    <a href="/app/383870/charts/" class="css-truncate">Firewatch</a>
+    </td>
+    <td class="app-chart"><svg width="120" height="40" viewBox="0 0 42 100" preserveAspectRatio="none" aria-hidden="true"><path fill="none" stroke="url(#graph-gradient)" stroke-width="2" vector-effect="non-scaling-stroke" d="M0 82.10L0 82.10L1 81.69L2 82.96L3 83.83L4 83.90L5 83.36L6 82.16L7 82.20L8 83.14L9 83.73L10 84.55L11 83.61L12 82.93L13 82.75L14 83.71L15 84.18L16 84.57L17 83.67L18 82.96L19 82.48L20 83.57L21 84.14L22 84.55L23 83.79L24 82.79L25 82.69L26 83.83L27 84.30L28 85.00L29 84.51L30 68.80L31 58.76L32 56.29L33 57.92L34 54.18L35 38.46L36 22.69L37 21.30L38 38.23L39 39.76L40 43.40L41 27.33L42 15.00"></path></svg></td>
+    <td class="text-center tabular-nums green">3,643</td>
+    </tr>
+    <tr class="app" data-appid="2586520" data-cache="1704907526">
+    <td class="applogo">
+    <a href="/app/2586520/charts/" tabindex="-1" aria-hidden="true">
+    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2586520/capsule_sm_120.jpg?t=1704907526" alt="">
+    </a>
+    </td>
+    <td>
+    <a href="/app/2586520/charts/" class="css-truncate">Atelier Resleriana: Forgotten Alchemy and the Polar Night Liberator [JP]</a>
+    <span class="green" title="New concurrent players max peak today"><svg width="16" height="16" viewBox="0 0 16 16" class="octicon octicon-flame" aria-hidden="true"><path d="M9.533.753V.752c.217 2.385 1.463 3.626 2.653 4.81C13.37 6.74 14.498 7.863 14.498 10c0 3.5-3 6-6.5 6S1.5 13.512 1.5 10c0-1.298.536-2.56 1.425-3.286.376-.308.862 0 1.035.454C4.46 8.487 5.581 8.419 6 8c.282-.282.341-.811-.003-1.5C4.34 3.187 7.035.75 8.77.146c.39-.137.726.194.763.607ZM7.998 14.5c2.832 0 5-1.98 5-4.5 0-1.463-.68-2.19-1.879-3.383l-.036-.037c-1.013-1.008-2.3-2.29-2.834-4.434-.322.256-.63.579-.864.953-.432.696-.621 1.58-.046 2.73.473.947.67 2.284-.278 3.232-.61.61-1.545.84-2.403.633a2.79 2.79 0 0 1-1.436-.874A3.198 3.198 0 0 0 3 10c0 2.53 2.164 4.5 4.998 4.5Z"></path></svg></span>
+    </td>
+    <td class="app-chart"><svg width="120" height="40" viewBox="0 0 42 100" preserveAspectRatio="none" aria-hidden="true"><path fill="none" stroke="url(#graph-gradient)" stroke-width="2" vector-effect="non-scaling-stroke" d="M38 85.00L38 85.00L39 44.77L40 18.45L41 15.00L42 43.50"></path></svg></td>
+    <td class="text-center tabular-nums green">856</td>
+    </tr>
+    <tr class="app" data-appid="2342950" data-cache="1704853796">
+    <td class="applogo">
+    <a href="/app/2342950/charts/" tabindex="-1" aria-hidden="true">
+    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2342950/capsule_sm_120.jpg?t=1704853796" alt="">
+    </a>
+    </td>
+    <td>
+    <a href="/app/2342950/charts/" class="css-truncate">God Of Weapons</a>
+    </td>
+    <td class="app-chart"><svg width="120" height="40" viewBox="0 0 42 100" preserveAspectRatio="none" aria-hidden="true"><path fill="none" stroke="url(#graph-gradient)" stroke-width="2" vector-effect="non-scaling-stroke" d="M0 84.37L0 84.37L1 84.40L2 83.77L3 83.29L4 81.03L5 78.45L6 79.71L7 83.95L8 84.40L9 84.64L10 82.02L11 78.23L12 80.46L13 84.10L14 82.84L15 82.14L16 81.09L17 78.84L18 79.44L19 83.20L20 83.41L21 82.29L22 81.00L23 79.17L24 79.89L25 83.47L26 85.00L27 83.89L28 83.38L29 76.16L30 64.88L31 57.01L32 50.93L33 51.32L34 44.17L35 23.15L36 22.55L37 22.52L38 34.24L39 35.39L40 30.64L41 15.00L42 18.07"></path></svg></td>
+    <td class="text-center tabular-nums green">2,437</td>
+    </tr>
+    <tr class="app" data-appid="1782570" data-cache="1704911131">
+    <td class="applogo">
+    <a href="/app/1782570/charts/" tabindex="-1" aria-hidden="true">
+    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1782570/capsule_sm_120.jpg?t=1704911131" alt="">
+    </a>
+    </td>
+    <td>
+    <a href="/app/1782570/charts/" class="css-truncate">Beer Factory</a>
+    <span class="green" title="New concurrent players max peak today"><svg width="16" height="16" viewBox="0 0 16 16" class="octicon octicon-flame" aria-hidden="true"><path d="M9.533.753V.752c.217 2.385 1.463 3.626 2.653 4.81C13.37 6.74 14.498 7.863 14.498 10c0 3.5-3 6-6.5 6S1.5 13.512 1.5 10c0-1.298.536-2.56 1.425-3.286.376-.308.862 0 1.035.454C4.46 8.487 5.581 8.419 6 8c.282-.282.341-.811-.003-1.5C4.34 3.187 7.035.75 8.77.146c.39-.137.726.194.763.607ZM7.998 14.5c2.832 0 5-1.98 5-4.5 0-1.463-.68-2.19-1.879-3.383l-.036-.037c-1.013-1.008-2.3-2.29-2.834-4.434-.322.256-.63.579-.864.953-.432.696-.621 1.58-.046 2.73.473.947.67 2.284-.278 3.232-.61.61-1.545.84-2.403.633a2.79 2.79 0 0 1-1.436-.874A3.198 3.198 0 0 0 3 10c0 2.53 2.164 4.5 4.998 4.5Z"></path></svg></span>
+    </td>
+    <td class="app-chart"><svg width="120" height="40" viewBox="0 0 42 100" preserveAspectRatio="none" aria-hidden="true"><path fill="none" stroke="url(#graph-gradient)" stroke-width="2" vector-effect="non-scaling-stroke" d="M40 85.00L40 85.00L41 30.76L42 15.00"></path></svg></td>
+    <td class="text-center tabular-nums green">2,367</td>
+    </tr>
+    <tr class="app" data-appid="2163330" data-cache="1704731958">
+    <td class="applogo">
+    <a href="/app/2163330/charts/" tabindex="-1" aria-hidden="true">
+    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2163330/capsule_sm_120.jpg?t=1704731958" alt="">
+    </a>
+    </td>
+    <td>
+    <a href="/app/2163330/charts/" class="css-truncate">Yet Another Zombie Survivors</a>
+    </td>
+    <td class="app-chart"><svg width="120" height="40" viewBox="0 0 42 100" preserveAspectRatio="none" aria-hidden="true"><path fill="none" stroke="url(#graph-gradient)" stroke-width="2" vector-effect="non-scaling-stroke" d="M0 83.35L0 83.35L1 83.38L2 84.62L3 84.56L4 81.23L5 78.97L6 80.85L7 83.15L8 84.12L9 84.56L10 82.03L11 78.76L12 80.38L13 83.91L14 83.76L15 82.56L16 79.26L17 77.67L18 79.76L19 83.35L20 83.35L21 80.91L22 77.29L23 76.08L24 77.96L25 83.70L26 85.00L27 83.53L28 79.38L29 76.82L30 58.51L31 58.57L32 63.57L33 62.04L34 47.32L35 38.14L36 43.14L37 52.53L38 51.12L39 48.73L40 29.10L41 15.00L42 21.30"></path></svg></td>
+    <td class="text-center tabular-nums green">1,750</td>
+    </tr>
+    <tr class="app" data-appid="351940" data-cache="1699208346">
+    <td class="applogo">
+    <a href="/app/351940/charts/" tabindex="-1" aria-hidden="true">
+    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/351940/capsule_sm_120.jpg?t=1699208346" alt="">
+    </a>
+    </td>
+    <td>
+    <a href="/app/351940/charts/" class="css-truncate">The Descendant</a>
+    </td>
+    <td class="app-chart"><svg width="120" height="40" viewBox="0 0 42 100" preserveAspectRatio="none" aria-hidden="true"><path fill="none" stroke="url(#graph-gradient)" stroke-width="2" vector-effect="non-scaling-stroke" d="M0 84.75L0 84.75L1 84.85L2 84.69L3 84.69L4 84.12L5 84.71L6 84.71L7 80.36L8 79.96L9 84.83L10 78.73L11 78.56L12 84.54L13 84.95L14 84.88L15 84.95L16 84.62L17 84.69L18 84.52L19 84.46L20 84.60L21 84.92L22 84.74L23 84.31L24 84.51L25 84.85L26 84.66L27 84.94L28 85.00L29 84.52L30 71.21L31 71.16L32 83.39L33 83.37L34 84.11L35 84.91L36 78.06L37 19.51L38 38.85L39 57.49L40 59.78L41 56.66L42 15.00"></path></svg></td>
+    <td class="text-center tabular-nums green">4,135</td>
+    </tr>
+    <tr class="app" data-appid="2591210" data-cache="1704911148">
+    <td class="applogo">
+    <a href="/app/2591210/charts/" tabindex="-1" aria-hidden="true">
+    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2591210/capsule_sm_120.jpg?t=1704911148" alt="">
+    </a>
+    </td>
+    <td>
+    <a href="/app/2591210/charts/" class="css-truncate">ASTRAL TALE-星界神話</a>
+    <span class="green" title="New concurrent players max peak today"><svg width="16" height="16" viewBox="0 0 16 16" class="octicon octicon-flame" aria-hidden="true"><path d="M9.533.753V.752c.217 2.385 1.463 3.626 2.653 4.81C13.37 6.74 14.498 7.863 14.498 10c0 3.5-3 6-6.5 6S1.5 13.512 1.5 10c0-1.298.536-2.56 1.425-3.286.376-.308.862 0 1.035.454C4.46 8.487 5.581 8.419 6 8c.282-.282.341-.811-.003-1.5C4.34 3.187 7.035.75 8.77.146c.39-.137.726.194.763.607ZM7.998 14.5c2.832 0 5-1.98 5-4.5 0-1.463-.68-2.19-1.879-3.383l-.036-.037c-1.013-1.008-2.3-2.29-2.834-4.434-.322.256-.63.579-.864.953-.432.696-.621 1.58-.046 2.73.473.947.67 2.284-.278 3.232-.61.61-1.545.84-2.403.633a2.79 2.79 0 0 1-1.436-.874A3.198 3.198 0 0 0 3 10c0 2.53 2.164 4.5 4.998 4.5Z"></path></svg></span>
+    </td>
+    <td class="app-chart"><svg width="120" height="40" viewBox="0 0 42 100" preserveAspectRatio="none" aria-hidden="true"><path fill="none" stroke="url(#graph-gradient)" stroke-width="2" vector-effect="non-scaling-stroke" d="M26 85.00L26 85.00L27 80.03L28 81.01L29 80.71L30 80.98L31 82.80L32 83.10L33 83.20L34 82.38L35 81.40L36 81.59L37 81.77L38 77.20L39 40.85L40 23.65L41 15.00L42 20.66"></path></svg></td>
+    <td class="text-center tabular-nums green">1,748</td>
+    </tr>
+    <tr class="app" data-appid="460920" data-cache="1704052630">
+    <td class="applogo">
+    <a href="/app/460920/charts/" tabindex="-1" aria-hidden="true">
+    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/460920/capsule_sm_120.jpg?t=1704052630" alt="">
+    </a>
+    </td>
+    <td>
+    <a href="/app/460920/charts/" class="css-truncate">Steep</a>
+    </td>
+    <td class="app-chart"><svg width="120" height="40" viewBox="0 0 42 100" preserveAspectRatio="none" aria-hidden="true"><path fill="none" stroke="url(#graph-gradient)" stroke-width="2" vector-effect="non-scaling-stroke" d="M0 77.64L0 77.64L1 77.80L2 82.46L3 84.43L4 83.16L5 78.37L6 77.02L7 77.39L8 81.89L9 84.71L10 84.75L11 81.15L12 79.80L13 79.19L14 82.91L15 85.00L16 83.81L17 81.15L18 79.76L19 79.35L20 83.08L21 84.30L22 84.43L23 81.36L24 67.78L25 57.51L26 51.58L27 53.70L28 41.31L29 27.60L30 30.42L31 29.73L32 37.95L33 36.19L34 34.31L35 15.00L36 22.04L37 32.22L38 40.49L39 40.53L40 35.62L41 21.71L42 29.36"></path></svg></td>
+    <td class="text-center tabular-nums green">1,413</td>
+    </tr>
+    <tr class="app" data-appid="1418630" data-cache="1704855269">
+    <td class="applogo">
+    <a href="/app/1418630/charts/" tabindex="-1" aria-hidden="true">
+    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1418630/capsule_sm_120.jpg?t=1704855269" alt="">
+    </a>
+    </td>
+    <td>
+    <a href="/app/1418630/charts/" class="css-truncate">Dread Hunger</a>
+    </td>
+    <td class="app-chart"><svg width="120" height="40" viewBox="0 0 42 100" preserveAspectRatio="none" aria-hidden="true"><path fill="none" stroke="url(#graph-gradient)" stroke-width="2" vector-effect="non-scaling-stroke" d="M0 82.31L0 82.31L1 83.51L2 84.61L3 79.75L4 75.25L5 70.16L6 76.64L7 84.09L8 85.00L9 77.61L10 69.80L11 59.56L12 62.64L13 75.73L14 77.38L15 60.14L16 53.40L17 40.47L18 48.64L19 70.22L20 71.58L21 53.18L22 43.16L23 33.54L24 45.95L25 69.19L26 74.18L27 59.62L28 42.45L29 26.15L30 43.36L31 67.86L32 71.71L33 53.40L34 38.01L35 19.60L36 35.03L37 64.49L38 73.66L39 56.03L40 29.58L41 15.00L42 28.12"></path></svg></td>
+    <td class="text-center tabular-nums green">975</td>
+    </tr>
+    <tr class="app" data-appid="222480" data-cache="1704862023">
+    <td class="applogo">
+    <a href="/app/222480/charts/" tabindex="-1" aria-hidden="true">
+    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/222480/capsule_sm_120.jpg?t=1704862023" alt="">
+    </a>
+    </td>
+    <td>
+    <a href="/app/222480/charts/" class="css-truncate">Resident Evil Revelations</a>
+    </td>
+    <td colspan="2" class="i muted">Trending on SteamDB</td>
+    </tr>
+    <tr class="app" data-appid="1172470" data-cache="1704884975">
+    <td class="applogo">
+    <a href="/app/1172470/charts/" tabindex="-1" aria-hidden="true">
+    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1172470/capsule_sm_120.jpg?t=1704884975" alt="">
+    </a>
+    </td>
+    <td>
+    <a href="/app/1172470/charts/" class="css-truncate">Apex Legends™</a>
+    </td>
+    <td colspan="2" class="i muted">Trending on SteamDB</td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    </div>
+    
+    
+    
+    </div>
+    
+    
+    
+    
+    </div>
+    
+    <div class="footer" role="contentinfo" id="steamdb-org" itemscope="" itemtype="http://schema.org/Organization" itemprop="publisher">
+    <meta itemprop="name" content="SteamDB">
+    <meta itemprop="url" content="https://steamdb.info/">
+    <meta itemprop="logo" content="https://steamdb.info/static/logos/512px.png">
+    <div class="footer-container">
+    <div class="footer-menu hide-small">
+    <ul>
+    <li class="navigation-heading"><svg width="16" height="16" viewBox="0 0 16 16" class="octicon octicon-info" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg> About</li>
+    <li><a href="/blog/">Blog</a></li>
+    <li><a href="/discord/">Discord</a></li>
+    <li><a href="/discord/bot/">Discord Bot</a></li>
+    <li><a href="/faq/">FAQ &amp; help</a></li>
+    <li><a href="/donate/">Donate &amp; contribute</a></li>
+    <li><a href="/extension/">Browser extension</a></li>
+    </ul>
+    <ul>
+    <li class="navigation-heading"><svg width="16" height="16" viewBox="0 0 16 16" class="octicon octicon-search" aria-hidden="true"><path d="M10.68 11.74a6 6 0 0 1-7.922-8.982 6 6 0 0 1 8.982 7.922l3.04 3.04a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215ZM11.5 7a4.499 4.499 0 1 0-8.997 0A4.499 4.499 0 0 0 11.5 7Z"></path></svg> Tools</li>
+    <li><a href="/sales/">Sales</a></li>
+    <li><a href="/charts/">Charts</a></li>
+    <li><a href="/calculator/">Calculator</a></li>
+    <li><a href="/patchnotes/">Patch notes</a></li>
+    <li><a href="/search/">Search</a></li>
+    <li><a href="/instantsearch/">Instant search</a></li>
+    <li><a href="/sales/history/">When is next sale?</a></li>
+    </ul>
+    <ul>
+    <li class="navigation-heading"><svg width="16" height="16" viewBox="0 0 16 16" class="octicon octicon-sync" aria-hidden="true"><path d="M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z"></path></svg> Tracking</li>
+    <li><a href="/apps/">Apps</a></li>
+    <li><a href="/subs/">Packages</a></li>
+    <li><a href="/bundles/">Bundles</a></li>
+    <li><a href="/history/">History</a></li>
+    <li><a href="/pricechanges/">Price changes</a></li>
+    <li><a href="/upcoming/free/">Free promotions</a></li>
+    <li><a href="/tech/">Technologies &amp; built with</a></li>
+    </ul>
+    <ul>
+    <li class="navigation-heading"><svg width="16" height="16" viewBox="0 0 16 16" class="octicon octicon-database" aria-hidden="true"><path d="M1 3.5c0-.626.292-1.165.7-1.59.406-.422.956-.767 1.579-1.041C4.525.32 6.195 0 8 0c1.805 0 3.475.32 4.722.869.622.274 1.172.62 1.578 1.04.408.426.7.965.7 1.591v9c0 .626-.292 1.165-.7 1.59-.406.422-.956.767-1.579 1.041C11.476 15.68 9.806 16 8 16c-1.805 0-3.475-.32-4.721-.869-.623-.274-1.173-.62-1.579-1.04-.408-.426-.7-.965-.7-1.591Zm1.5 0c0 .133.058.318.282.551.227.237.591.483 1.101.707C4.898 5.205 6.353 5.5 8 5.5c1.646 0 3.101-.295 4.118-.742.508-.224.873-.471 1.1-.708.224-.232.282-.417.282-.55 0-.133-.058-.318-.282-.551-.227-.237-.591-.483-1.101-.707C11.102 1.795 9.647 1.5 8 1.5c-1.646 0-3.101.295-4.118.742-.508.224-.873.471-1.1.708-.224.232-.282.417-.282.55Zm0 4.5c0 .133.058.318.282.551.227.237.591.483 1.101.707C4.898 9.705 6.353 10 8 10c1.646 0 3.101-.295 4.118-.742.508-.224.873-.471 1.1-.708.224-.232.282-.417.282-.55V5.724c-.241.15-.503.286-.778.407C11.475 6.68 9.805 7 8 7c-1.805 0-3.475-.32-4.721-.869a6.15 6.15 0 0 1-.779-.407Zm0 2.225V12.5c0 .133.058.318.282.55.227.237.592.484 1.1.708 1.016.447 2.471.742 4.118.742 1.647 0 3.102-.295 4.117-.742.51-.224.874-.47 1.101-.707.224-.233.282-.418.282-.551v-2.275c-.241.15-.503.285-.778.406-1.247.549-2.917.869-4.722.869-1.805 0-3.475-.32-4.721-.869a6.327 6.327 0 0 1-.779-.406Z"></path></svg> Database</li>
+    <li><a href="/tags/">User tags</a></li>
+    <li><a href="/calendar/">Release calendar</a></li>
+    <li><a href="/upcoming/">Upcoming releases</a></li>
+    <li><a href="/upcoming/mostfollowed/">Most followed upcoming</a></li>
+    <li><a href="/stats/releases/">Game releases by year</a></li>
+    <li><a href="/badges/">Profile badges</a></li>
+    <li><a href="/developers/">Developers</a></li>
+    <li><a href="/publishers/">Publishers</a></li>
+    </ul>
+    <ul>
+    <li class="navigation-heading"><svg width="16" height="16" viewBox="0 0 16 16" class="octicon octicon-number" aria-hidden="true"><path d="M9 4.75A.75.75 0 0 1 9.75 4h4a.75.75 0 0 1 .53 1.28l-1.89 1.892c.312.076.604.18.867.319.742.391 1.244 1.063 1.244 2.005 0 .653-.231 1.208-.629 1.627-.386.408-.894.653-1.408.777-1.01.243-2.225.063-3.124-.527a.751.751 0 0 1 .822-1.254c.534.35 1.32.474 1.951.322.306-.073.53-.201.67-.349.129-.136.218-.32.218-.596 0-.308-.123-.509-.444-.678-.373-.197-.98-.318-1.806-.318a.75.75 0 0 1-.53-1.28l1.72-1.72H9.75A.75.75 0 0 1 9 4.75Zm-3.587 5.763c-.35-.05-.77.113-.983.572a.75.75 0 1 1-1.36-.632c.508-1.094 1.589-1.565 2.558-1.425 1 .145 1.872.945 1.872 2.222 0 1.433-1.088 2.192-1.79 2.681-.308.216-.571.397-.772.573H7a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75c0-.69.3-1.211.67-1.61.348-.372.8-.676 1.15-.92.8-.56 1.18-.904 1.18-1.474 0-.473-.267-.69-.587-.737ZM5.604.089A.75.75 0 0 1 6 .75v4.77h.711a.75.75 0 0 1 0 1.5H3.759a.75.75 0 0 1 0-1.5H4.5V2.15l-.334.223a.75.75 0 0 1-.832-1.248l1.5-1a.75.75 0 0 1 .77-.037Z"></path></svg> Rankings</li>
+    <li><a href="/stats/gameratings/">Top rated games</a></li>
+    <li><a href="/badge/13/">Top game owners</a></li>
+    <li><a href="/stats/toplevels/">Top profile levels</a></li>
+    <li><a href="/stats/globaltopsellers/">Top selling games</a></li>
+    <li><a href="/topsellers/">Top selling games last week</a></li>
+    <li><a href="/stats/mostfollowed/">Most followed games</a></li>
+    <li><a href="/stats/mostwished/">Most wishlisted games</a></li>
+    </ul>
+    <ul>
+    <li class="navigation-heading"><svg width="16" height="16" viewBox="0 0 16 16" class="octicon octicon-person" aria-hidden="true"><path d="M10.561 8.073a6.005 6.005 0 0 1 3.432 5.142.75.75 0 1 1-1.498.07 4.5 4.5 0 0 0-8.99 0 .75.75 0 0 1-1.498-.07 6.004 6.004 0 0 1 3.431-5.142 3.999 3.999 0 1 1 5.123 0ZM10.5 5a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"></path></svg> Account</li>
+    <li><a href="/login/" rel="nofollow">Sign in via Steam</a></li>
+    <li><a href="/freepackages/">Free packages</a></li>
+    <li>&nbsp;</li>
+    <li><a href="https://steamstat.us/">Steam Status</a></li>
+    <li><a href="https://steamapi.xpaw.me/">Steam Web API</a></li>
+    </ul>
+    </div>
+    <div class="footer-copyright">
+    <div>
+    <p>
+    SteamDB is a hobby project and is not affiliated with Valve or Steam. All times on the site are UTC.
+    <a href="/faq/#what-steamdb-is-not">Fair use disclaimer</a> ·
+    <a href="/faq/#privacy">Privacy</a>
+    </p>
+    <p>Steam and the Steam logo are trademarks of Valve Corporation. All other trademarks are property of their respective owners.</p>
+    </div>
+    <div class="footer-buttons">
+    <a class="btn-social tooltipped tooltipped-n" aria-label="Discord" href="/discord/" rel="nofollow">
+    <svg viewBox="0 0 16 16" width="24" height="24" class="btn-social-icon" aria-hidden="true">
+    <path d="M13.54 2.9a13.2 13.2 0 00-3.25-1c-.02 0-.04 0-.05.02-.15.25-.3.58-.41.83a12.18 12.18 0 00-3.66 0 8.4 8.4 0 00-.41-.83.05.05 0 00-.05-.02 13.16 13.16 0 00-3.28 1.03 13.5 13.5 0 00-2.34 9.14c1.37 1 2.7 1.61 4 2.02.01 0 .04 0 .05-.02.3-.42.58-.86.82-1.33a.05.05 0 00-.03-.07 8.76 8.76 0 01-1.25-.6.05.05 0 010-.08l.24-.2a.05.05 0 01.05 0 9.46 9.46 0 008.05 0h.05l.25.2c.03.02.02.07 0 .09-.4.23-.82.43-1.26.59a.05.05 0 00-.02.07c.24.47.51.91.81 1.33.02.02.04.03.06.02a13.23 13.23 0 004.02-2.06 13.41 13.41 0 00-2.39-9.12zm-8.2 7.31c-.78 0-1.43-.72-1.43-1.6 0-.9.64-1.62 1.44-1.62.8 0 1.45.73 1.43 1.61 0 .89-.63 1.61-1.43 1.61zm5.32 0c-.79 0-1.43-.72-1.43-1.6 0-.9.63-1.62 1.43-1.62.81 0 1.45.73 1.44 1.61 0 .89-.63 1.61-1.44 1.61z"></path>
+    </svg>
+    </a>
+    <a class="btn-social tooltipped tooltipped-n" aria-label="Twitter" href="https://twitter.com/intent/follow?screen_name=SteamDB" itemprop="sameAs">
+    <svg viewBox="0 0 24 24" width="24" height="24" class="btn-social-icon" aria-hidden="true">
+    <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"></path>
+    </svg>
+    </a>
+    <a class="btn-social tooltipped tooltipped-n" aria-label="Mastodon" href="https://infosec.exchange/@SteamDB" itemprop="sameAs" rel="me">
+    <svg viewBox="0 0 38 38" width="24" height="24" class="btn-social-icon" aria-hidden="true">
+    <path d="M36.4 8.4c-.6-4-4.1-7.2-8.3-7.8a67 67 0 0 0-9.6-.5c-6.3 0-7.7.4-8.4.5C6.1 1.2 2.3 4 1.4 8c-.4 2-.5 4.2-.4 6.2.1 3 .1 5.8.4 8.7.2 2 .5 3.9 1 5.8.8 3.4 4.3 6.3 7.7 7.5a21.2 21.2 0 0 0 12.6.3c1-.3 2-.6 2.8-1.2v-2.9a32 32 0 0 1-7.4.8c-4.3 0-5.5-2-5.8-2.8a8.6 8.6 0 0 1-.5-2.3h.1c2.4.5 4.8.8 7.3.8h1.7c2.5 0 5-.2 7.5-.7h.2c3.8-.7 7.4-3 7.8-8.7V17c0-.8.3-5.7 0-8.6Zm-5.9 14.2h-4V13c0-2-.8-3-2.6-3-2 0-2.9 1.1-2.9 3.6v5.3h-4v-5.3c0-2.5-1-3.7-2.9-3.7-1.7 0-2.6 1-2.6 3v9.7h-4v-10a7 7 0 0 1 1.6-4.8C10 6.6 11.6 6 13.4 6c2 0 3.6.8 4.6 2.4l1 1.6 1-1.6C21 6.8 22.6 6 24.7 6c1.7 0 3.2.6 4.2 1.8a7 7 0 0 1 1.6 4.9v10Z"></path>
+    </svg>
+    </a>
+    <a class="btn-social tooltipped tooltipped-n" aria-label="GitHub" href="https://github.com/SteamDatabase" itemprop="sameAs">
+    <svg viewBox="0 0 16 16" width="24" height="24" class="btn-social-icon" aria-hidden="true">
+    <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+    </svg>
+    </a>
+    <a class="btn-social tooltipped tooltipped-n" aria-label="Steam Group" href="https://steamcommunity.com/groups/steamdb" itemprop="sameAs">
+    <svg viewBox="0 0 16 16" width="24" height="24" class="btn-social-icon" aria-hidden="true">
+    <path d="M8 0a8 8 0 00-8 7.47c.07.1.13.21.18.32l4.15 1.67a2.2 2.2 0 011.31-.36l1.97-2.8v-.04c0-1.65 1.37-3 3.05-3a3.03 3.03 0 013.05 3 3.03 3.03 0 01-3.12 3l-2.81 1.97c0 .3-.05.6-.17.9a2.25 2.25 0 01-4.23-.37L.4 10.56A8.01 8.01 0 108 0zm2.66 4.27c-1.12 0-2.03.9-2.03 2s.91 1.99 2.03 1.99c1.12 0 2.03-.9 2.03-2s-.9-2-2.03-2zm0 .5c.85 0 1.53.66 1.53 1.49s-.68 1.5-1.53 1.5c-.84 0-1.52-.67-1.52-1.5s.68-1.5 1.52-1.5zM5.57 9.6c-.22 0-.43.04-.62.11l1.02.42c.65.26.95.99.68 1.62-.27.63-1 .93-1.65.67l-1-.4a1.73 1.73 0 003.13-.08c.18-.42.18-.88.01-1.3A1.69 1.69 0 005.57 9.6z"></path>
+    </svg>
+    </a>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div id="js-notifications">
+    <noscript>
+    <div class="toast-header"><b>Enable JavaScript</b></div>
+    <div class="toast-body">For SteamDB to function correctly, JavaScript should be enabled.</div>
+    </noscript>
+    </div>
+    <div><div id="js-hover" style="left: 304px; top: 875.094px;" hidden=""></div></div>
+    <div id="js-screenshots">
+    <div class="screenshot-header">
+    <span>
+    <a href="#" class="screenshot-name"></a>
+    </span>
+    <span>
+    <button type="button" class="btn btn-sm btn-primary screenshot-prev">← Prev</button>
+    <span class="screenshot-index"></span>
+    <button type="button" class="btn btn-sm btn-primary screenshot-next">Next →</button>
+    </span>
+    <span>
+    <a href="#" target="_blank" class="btn btn-sm screenshot-open hide-small">Open link</a>
+    <button type="button" class="btn btn-sm btn-danger screenshot-close">Close<span class="hide-small"> (Esc)</span></button>
+    </span>
+    </div>
+    <div class="screenshot-contain"></div>
+    </div>
+    <script defer="" src="https://static.cloudflareinsights.com/beacon.min.js/v84a3a4012de94ce1a686ba8c167c359c1696973893317" integrity="sha512-euoFGowhlaLqXsPWQ48qSkBSCFs3DPRyiwVu3FjR96cMPx+Fr+gpWRhIafcHwqwCqWS42RZhIudOvEI+Ckf6MA==" nonce="" data-cf-beacon="{&quot;rayId&quot;:&quot;84374d06be27fbd6&quot;,&quot;version&quot;:&quot;2023.10.0&quot;,&quot;token&quot;:&quot;91efbe05a59742ddadf5d555608bbe98&quot;}" crossorigin="anonymous"></script>
+    
+    </body>
