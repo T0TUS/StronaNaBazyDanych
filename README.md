@@ -1,2 +1,3 @@
 # StronaNaBazyDanych
 StronaNaBazyDanych
+zmiania
