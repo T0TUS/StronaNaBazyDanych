@@ -439,7 +439,8 @@ abbr[title] {
     width: 100%;
     max-width: 250px;
     background-color: #333;
-    border-radius: 6px
+    border-radius: 6px;
+    margin-top: 10px;
 }
 
 .header-search .field {
