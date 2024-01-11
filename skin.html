@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkinDB</title>
+
     <link rel="icon" href="png\SteamDBlogo.png">
     <link rel="preload" href="fonts\Inter-Regular.woff2?v=4.0" as="font" type="font/woff2" crossorigin="">
     <link rel="preload" href="fonts\Inter-Bold.woff2?v=4.0" as="font" type="font/woff2" crossorigin="">
@@ -15,6 +16,10 @@
     <meta name="description" content="SkinDB is a database of skins in CS2.">
     <meta property="og:description" content="SkinDB is a database of skins in CS2.">
     <meta name="theme-color" content="#000000">
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="script.js"></script>
 </head>
 
 <body class="page-apps">
@@ -167,17 +172,19 @@
                                 <div class="header-two-things">
                                     <a class="header-thing tooltipped tooltipped-n" aria-label="Change in last month">
                                         <div class="header-thing-number header-thing-good">Price</div>
-                                        <span class="header-thing-good">↑Highest Price</span> <span
-                                            class="header-thing-poor">↓Lowest Price</span>
+                                        <span class="header-thing-good">↑Highest Price</span> 
+                                        <span class="header-thing-poor">↓Lowest Price</span>
                                     </a>
-                                    <a aria-label="Transactions in last month"
-                                        class="header-thing header-thing-good tooltgitipped tooltipped-n" id="js-charts-button">
-                                        <div class="header-thing-number">914,659</div>
-                                        Number of transactions
+                                    <a class="header-thing tooltipped tooltipped-n" aria-label="Change in last month">
+                                        <div class="header-thing-number header-thing-good">914,659</div>
+                                        <span class="header-thing-good">Number of transactions</span>
                                     </a>
                                 </div>
                                 <p class="header-description" itemprop="description">Some kind of description I guess.</p>
                             </div>
+
+                            <div id="chart-container" style="height: 400px;"></div>
+
                         </div>
                     </div>
                 </div>
