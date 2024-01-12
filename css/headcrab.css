@@ -3,7 +3,7 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url(/static/fonts/Inter-Regular.woff2?v=4.0) format("woff2")
+    src: url(/fonts/Inter-Regular.woff2) format("woff2")
 }
 
 @font-face {
@@ -11,7 +11,7 @@
     font-style: italic;
     font-weight: 400;
     font-display: swap;
-    src: url(/static/fonts/Inter-Italic.woff2?v=4.0) format("woff2")
+    src: url(/fonts/Inter-Italic.woff2) format("woff2")
 }
 
 @font-face {
@@ -19,7 +19,7 @@
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: url(/static/fonts/Inter-Bold.woff2?v=4.0) format("woff2")
+    src: url(/fonts/Inter-Bold.woff2) format("woff2")
 }
 
 @font-face {

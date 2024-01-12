@@ -1,37 +1,16 @@
-$(document).ready(function() {
-    // AJAX request to fetch data from the server
-    $.get('/get_data', function(response) {
-        // Extract timestamp and price from the data
-        var timestamps = response.data.map(function(point) {
-            return new Date(point.time).getTime();
-        });
+const express = require('express');
+const app = express();
 
-        var prices = response.data.map(function(point) {
-            return point.price;
-        });
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  // Dodaj inne nagłówki CORS, jeśli są potrzebne
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
 
-        // Create Highcharts chart
-        Highcharts.chart('chart-container', {
-            title: {
-                text: 'CS:GO Skin Prices'
-            },
-            xAxis: {
-                type: 'datetime',
-                title: {
-                    text: 'Time'
-                }
-            },
-            yAxis: {
-                title: {
-                    text: 'Price'
-                }
-            },
-            series: [{
-                name: 'Price',
-                data: prices,
-                pointStart: timestamps[0],
-                pointInterval: 24 * 3600 * 1000 // Assuming data is daily
-            }]
-        });
-    });
+// Tutaj dodaj kod obsługi żądań
+
+const port = 3000;
+app.listen(port, () => {
+  console.log(`Serwer nasłuchuje na porcie ${port}`);
 });
