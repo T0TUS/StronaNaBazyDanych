@@ -32,7 +32,7 @@
 }
 
 :root {
-    --navbar-height: 48px;
+    --navbar-height: 60px;
     --body-bg-color: #161920;
     --body-color: #ddd;
     --contrast-color: #fff;
@@ -440,7 +440,7 @@ abbr[title] {
     max-width: 250px;
     background-color: #333;
     border-radius: 6px;
-    margin-top: 10px;
+    margin-top: 9px
 }
 
 .header-search .field {
@@ -484,7 +484,7 @@ abbr[title] {
 .header-login {
     display: inline-block;
     color: #fff;
-    padding: 0 10px
+    padding: 0 15px
 }
 
 a.header-login:hover {
