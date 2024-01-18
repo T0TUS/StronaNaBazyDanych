@@ -19,6 +19,10 @@
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body class="page-apps">
@@ -46,13 +50,7 @@
                         </path>
                     </svg></button>
             </form>
-            <a href="/sales/">Sales</a>
-            <a href="/charts/">Charts</a>
-            <a href="/calculator/">Calculator</a>
-            <a href="/calendar/">Calendar</a>
-            <a href="/patchnotes/">Patches</a>
-            <a href="/discord/">Discord</a>
-            <a href="/instantsearch/">Find games</a>
+            <a href="inventory.html">Inventory</a>
             <button type="button" class="btn btn-outline header-search-close">Close</button>
         </div>
         <button type="button" class="header-search-mobile" aria-label="Open search"><svg width="24" height="24"
@@ -62,7 +60,7 @@
                 </path>
             </svg></button>
         <div class="header-user hide-small">
-            <a class="header-login" href="/login/" rel="nofollow">
+            <a class="header-login" href="login.html" rel="nofollow">
                 <svg width="20" height="20" viewBox="0 0 16 16" class="octicon octicon-steam" aria-hidden="true">
                     <path
                         d="M8 0a8 8 0 00-8 7.47c.07.1.13.21.18.32l4.15 1.67a2.2 2.2 0 011.31-.36l1.97-2.8v-.04c0-1.65 1.37-3 3.05-3a3.03 3.03 0 013.05 3 3.03 3.03 0 01-3.12 3l-2.81 1.97c0 .3-.05.6-.17.9a2.25 2.25 0 01-4.23-.37L.4 10.56A8.01 8.01 0 108 0zm2.66 4.27c-1.12 0-2.03.9-2.03 2s.91 1.99 2.03 1.99c1.12 0 2.03-.9 2.03-2s-.9-2-2.03-2zm0 .5c.85 0 1.53.66 1.53 1.49s-.68 1.5-1.53 1.5c-.84 0-1.52-.67-1.52-1.5s.68-1.5 1.52-1.5zM5.57 9.6c-.22 0-.43.04-.62.11l1.02.42c.65.26.95.99.68 1.62-.27.63-1 .93-1.65.67l-1-.4a1.73 1.73 0 003.13-.08c.18-.42.18-.88.01-1.3A1.69 1.69 0 005.57 9.6z">
@@ -116,49 +114,8 @@
                             </div>
                         </div>
                         <div class="row app-row">
-                            <div class="span8">
-                                <table class="table table-bordered table-hover table-responsive-flex">
-                                    <tbody>
-                                        <tr>
-                                            <td class="span3">Item Type</td>
-                                            <td>730</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Skin Name</td>
-                                            <td itemprop="applicationCategory">Game</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Collection</td>
-                                            <td><a href="https://steamdb.info/developer/Valve/"
-                                                    itemprop="author">Valve</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Rarity</td>
-                                            <td><a href="https://steamdb.info/publisher/Valve/"
-                                                    itemprop="publisher">Valve</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Wear and Tear</td>
-                                            <td><a href="https://steamdb.info/tech/Engine/Source2/">Engine.Source2</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Stat Track</td>
-                                            <td><a href="https://steamdb.info/changelist/21764025/"
-                                                    rel="nofollow">21764025</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Souvenir</td>
-                                            <td>4 January 2024 – 22:30:42 UTC <i class="muted">(<time class="timeago"
-                                                        datetime="2024-01-04T22:30:42+00:00" itemprop="dateModified"
-                                                        content="2024-01-04T22:30:42+00:00"
-                                                        title="4 January 2024 at 22:30:42 UTC">6 days ago</time>)</i>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div class="span8" id="skininfo">
+
                             </div>
 
 
@@ -168,13 +125,15 @@
                                         width="324" height="151">
                                 </div>
                                 <div class="header-two-things">
-                                    <a class="header-thing tooltipped tooltipped-n" aria-label="Change in last month">
-                                        <div class="header-thing-number header-thing-good">Price</div>
-                                        <span class="header-thing-good">↑Highest Price</span>
-                                        <span class="header-thing-poor">↓Lowest Price</span>
+                                    <a class="header-thing tooltipped tooltipped-n" aria-label="Current Price">
+                                        <div class="header-thing-number header-thing-good" id="currentPrice">Price</div>
+                                        <span class="header-thing-good" id="highestPrice">↑Highest Price</span>
+                                        <span class="header-thing-poor" id="lowestPrice">↓Lowest Price</span>
                                     </a>
-                                    <a class="header-thing tooltipped tooltipped-n" aria-label="Change in last month">
-                                        <div class="header-thing-number header-thing-good">914,659</div>
+                                    <a class="header-thing tooltipped tooltipped-n"
+                                        aria-label="Total number of transactions">
+                                        <div class="header-thing-number header-thing-good" id="numberOfTransactions">
+                                        </div>
                                         <span class="header-thing-good">Number of transactions</span>
                                     </a>
                                 </div>
@@ -197,9 +156,9 @@
                                         style="position: relative; overflow: hidden; width: 100%; height: 400px; text-align: left; line-height: normal; z-index: 0; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); user-select: none; touch-action: manipulation; outline: none; font-size: 16px; font-family: inherit;">
                                         <script>
                                             (async () => {
-                                        
+
                                                 const data = await fetch('json/usdeur.json').then(response => response.json());
-                                        
+
                                                 Highcharts.setOptions({
                                                     colors: ['#6c3'], // Set the line color to #6c3
                                                     chart: {
@@ -233,7 +192,7 @@
                                                         },
                                                     }
                                                 });
-                                        
+
                                                 Highcharts.chart('js-chart-players', {
                                                     chart: {
                                                         zoomType: 'x'
@@ -279,13 +238,13 @@
                                                             }
                                                         }
                                                     },
-                                        
+
                                                     series: [{
                                                         type: 'area',
                                                         name: 'USD to EUR',
                                                         data: data
                                                     }],
-                                        
+
                                                     // Additional elements
                                                     yAxis: {
                                                         gridLineColor: '#333333',
@@ -317,7 +276,7 @@
                                                             zIndex: 1
                                                         }]
                                                     },
-                                        
+
                                                     navigator: {
                                                         yAxis: {
                                                             gridLineColor: 'rgba(180, 180, 180, 0.2)',
@@ -332,7 +291,7 @@
                                                             }]
                                                         }
                                                     },
-                                        
+
                                                     yAxis: {
                                                         plotLines: [{
                                                             value: 244,
@@ -342,7 +301,7 @@
                                                             zIndex: 2
                                                         }]
                                                     },
-                                        
+
                                                     plotOptions: {
                                                         series: {
                                                             tracker: {
@@ -366,6 +325,130 @@
             </div>
         </div>
     </div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const SkinDetails = () => {
+            const [skinDetails, setSkinDetails] = useState({});
+            const urlParams = new URLSearchParams(window.location.search);
+            const skinId = urlParams.get('skinId');
+
+            useEffect(() => {
+                // Zapytanie do API obsługującego bazę danych
+                axios.get(`/api/skins/${skinId}`)
+                    .then(response => {
+                        setSkinDetails(response.data);
+                    })
+                    .catch(error => {
+                        console.error('Błąd podczas pobierania danych z API:', error);
+                    });
+            }, [skinId]);
+
+            return (
+                <table className="table table-bordered table-hover table-responsive-flex">
+                    <tbody>
+                        <tr>
+                            <td className="span3">Item Type</td>
+                            <td>{skinDetails.itemType}</td>
+                        </tr>
+                        <tr>
+                            <td>Skin Name</td>
+                            <td>{skinDetails.skinName}</td>
+                        </tr>
+                        <tr>
+                            <td>Collection</td>
+                            <td>{skinDetails.collection}</td>
+                        </tr>
+                        <tr>
+                            <td>Rarity</td>
+                            <td>{skinDetails.rarity}</td>
+                        </tr>
+                        <tr>
+                            <td>Wear and Tear</td>
+                            <td>{skinDetails.wearAndTear}</td>
+                        </tr>
+                        <tr>
+                            <td>Stat Track</td>
+                            <td>{skinDetails.statTrack}</td>
+                        </tr>
+                        <tr>
+                            <td>Souvenir</td>
+                            <td>
+                                {skinDetails.souvenir}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            );
+        };
+        ReactDOM.render(
+            React.createElement(SkinDetails, null),
+            document.getElementById('skininfo')
+        );
+    </script>
+    <script>
+        // Function to find the minimum and maximum values in the JSON data
+        function findMinMaxValues(data) {
+            var minValue = Number.MAX_VALUE;
+            var maxValue = Number.MIN_VALUE;
+
+            for (var i = 0; i < data.length; i++) {
+                var value = data[i][1];
+                minValue = Math.min(minValue, value);
+                maxValue = Math.max(maxValue, value);
+            }
+
+            return { min: minValue, max: maxValue };
+        }
+
+        // Function to update HTML elements with corresponding values
+        function updateHTMLValues(data) {
+            // Find min and max values
+            var minMaxValues = findMinMaxValues(data);
+            var minValue = minMaxValues.min;
+            var maxValue = minMaxValues.max;
+
+            // Update Price values
+            document.getElementById("currentPrice").innerText = data[data.length - 1][1].toFixed(4);
+            document.getElementById("highestPrice").innerText = "↑Highest Price " + maxValue.toFixed(4);
+            document.getElementById("lowestPrice").innerText = "↓Lowest Price " + minValue.toFixed(4);
+
+            // Calculate and update Number of transactions
+            var numberOfTransactions = calculateNumberOfTransactions(data);
+            document.getElementById("numberOfTransactions").innerText = numberWithCommas(numberOfTransactions);
+        }
+
+        // Function to calculate the number of transactions
+        function calculateNumberOfTransactions(data) {
+            // Zliczanie ilości przecinków
+            var numberOfCommas = 0;
+
+            for (var i = 0; i < data.length; i++) {
+                var valueString = data[i][1].toString();
+                var commasInValue = valueString.split('.').length - 1;
+
+                numberOfCommas += commasInValue;
+            }
+
+            return numberOfCommas;
+        }
+
+        // Function to add commas to a number for better formatting
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        // Fetch the JSON file
+        fetch('json/usdeur.json')
+            .then(response => response.json())
+            .then(jsonData => {
+                // Call the function to update HTML values with the retrieved JSON data
+                updateHTMLValues(jsonData);
+            })
+            .catch(error => console.error('Error fetching JSON file:', error));
+    </script>
+
 </body>
 
 </html>
