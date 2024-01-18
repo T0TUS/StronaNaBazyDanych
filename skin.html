@@ -115,7 +115,7 @@
                         </div>
                         <div class="row app-row">
                             <div class="span8" id="skininfo">
-                                
+
                             </div>
 
 
@@ -125,13 +125,15 @@
                                         width="324" height="151">
                                 </div>
                                 <div class="header-two-things">
-                                    <a class="header-thing tooltipped tooltipped-n" aria-label="Change in last month">
+                                    <a class="header-thing tooltipped tooltipped-n" aria-label="Current Price">
                                         <div class="header-thing-number header-thing-good" id="currentPrice">Price</div>
                                         <span class="header-thing-good" id="highestPrice">↑Highest Price</span>
                                         <span class="header-thing-poor" id="lowestPrice">↓Lowest Price</span>
                                     </a>
-                                    <a class="header-thing tooltipped tooltipped-n" aria-label="Change in last month">
-                                        <div class="header-thing-number header-thing-good" id="numberOfTransactions">914,659</div>
+                                    <a class="header-thing tooltipped tooltipped-n"
+                                        aria-label="Total number of transactions">
+                                        <div class="header-thing-number header-thing-good" id="numberOfTransactions">
+                                        </div>
                                         <span class="header-thing-good">Number of transactions</span>
                                     </a>
                                 </div>
@@ -385,7 +387,67 @@
             document.getElementById('skininfo')
         );
     </script>
+    <script>
+        // Function to find the minimum and maximum values in the JSON data
+        function findMinMaxValues(data) {
+            var minValue = Number.MAX_VALUE;
+            var maxValue = Number.MIN_VALUE;
 
+            for (var i = 0; i < data.length; i++) {
+                var value = data[i][1];
+                minValue = Math.min(minValue, value);
+                maxValue = Math.max(maxValue, value);
+            }
+
+            return { min: minValue, max: maxValue };
+        }
+
+        // Function to update HTML elements with corresponding values
+        function updateHTMLValues(data) {
+            // Find min and max values
+            var minMaxValues = findMinMaxValues(data);
+            var minValue = minMaxValues.min;
+            var maxValue = minMaxValues.max;
+
+            // Update Price values
+            document.getElementById("currentPrice").innerText = data[data.length - 1][1].toFixed(4);
+            document.getElementById("highestPrice").innerText = "↑Highest Price " + maxValue.toFixed(4);
+            document.getElementById("lowestPrice").innerText = "↓Lowest Price " + minValue.toFixed(4);
+
+            // Calculate and update Number of transactions
+            var numberOfTransactions = calculateNumberOfTransactions(data);
+            document.getElementById("numberOfTransactions").innerText = numberWithCommas(numberOfTransactions);
+        }
+
+        // Function to calculate the number of transactions
+        function calculateNumberOfTransactions(data) {
+            // Zliczanie ilości przecinków
+            var numberOfCommas = 0;
+
+            for (var i = 0; i < data.length; i++) {
+                var valueString = data[i][1].toString();
+                var commasInValue = valueString.split('.').length - 1;
+
+                numberOfCommas += commasInValue;
+            }
+
+            return numberOfCommas;
+        }
+
+        // Function to add commas to a number for better formatting
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        // Fetch the JSON file
+        fetch('json/usdeur.json')
+            .then(response => response.json())
+            .then(jsonData => {
+                // Call the function to update HTML values with the retrieved JSON data
+                updateHTMLValues(jsonData);
+            })
+            .catch(error => console.error('Error fetching JSON file:', error));
+    </script>
 
 </body>
 
