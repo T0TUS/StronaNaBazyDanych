@@ -14,7 +14,7 @@ token = "YY7AtGmBB5uAAcgdEP5G0u34dqbbmEYmr7-ZgOEG4spK_6l9XMThk7HQckSQVWwD7mGxKSL
 app = Flask(__name__)
 
 @app.route('/<weaponType>/<skinName>')
-def index(weaponType, skinName):
+def skin(weaponType, skinName):
     # Tutaj możesz użyć wartości weaponType i skinName
     # do przekazania ich do funkcji get_data() lub wykonywania innych operacji
 
@@ -22,6 +22,24 @@ def index(weaponType, skinName):
 
     context = {'getchart': getchart}
     return render_template('skin.html', **context)
+
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+@app.route('/register')
+def register():
+    return render_template('register.html')
+
+@app.route('/inventory')
+def inventory():
+    return render_template('../inventory.html')
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
 
 @app.route('/get_data', methods=['GET'])
 def get_data(weaponType,skinName):
