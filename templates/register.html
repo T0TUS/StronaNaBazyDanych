@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkinDB</title>
-    <link rel="stylesheet" href="css/login.css">
-    <link rel="stylesheet" href="css/headcrab.css">
+    <link rel="stylesheet" href="static/css/register.css">
+    <link rel="stylesheet" href="static/css/headcrab.css">
     <link rel="icon" href="png/SteamDBlogo.png">
     <link rel="preload" href="../fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin="">
     <link rel="preload" href="../fonts/Inter-Bold.woff2" as="font" type="font/woff2" crossorigin="">
@@ -56,7 +56,6 @@
             </svg> <span>Sign in</span>
         </a>
     </div>
-    </div>
     <div class="header-search-suggestions">
         <div class="container" id="js-search-tips">
             <p>Start typing to see game suggestions. This only suggests apps that have a store page.</p>
@@ -88,19 +87,48 @@
 
 
     <div class="container">
-        <form class="login-form">
-            <h2>Login</h2>
+        <form class="register-form" method="POST" action="/register">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
 
-            <label for="password">Password:</label>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Hasło:</label>
             <input type="password" id="password" name="password" required>
 
-            <button type="submit" class="login-button">Login</button>
-        </form>
+            <label for="password_confirm">Potwierdź hasło:</label>
+            <input type="password" id="password_confirm" name="password_confirm" required>
 
-        <p>Don't have an account? <a href="/reginster">Register here</a>.</p>
+            <button type="submit" class="register-button">Zarejestruj</button>
+        </form>
     </div>
+	
+	<div id="termsPopup" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); z-index: 1;">
+    <div id="termsContent" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px;">
+      <h1>Terms</h1>
+      <p>Tu kiedys moze pojawi sie tresc regulaminu</p>
+      <button onclick="closeTerms()">Close terms</button>
+    </div>
+  </div>
+<script>
+    function openTerms() {
+      $("#termsPopup").show();
+    }
+
+    function closeTerms() {
+      $("#termsPopup").hide();
+    }
+
+    function validateForm() {
+      if (!document.getElementById('acceptTerms').checked) {
+        alert("You need to accept latest terms.");
+        return false;
+      }
+      return true;
+    }
+  </script>
 </body>
 
+  
 </html>
