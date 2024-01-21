@@ -4,12 +4,22 @@ import pandas as pd
 from influxdb_client.client.write_api import SYNCHRONOUS
 from flask import Flask, render_template, jsonify
 import json
+import psycopg2
 
 # Konfiguracja InfluxDB
 influxdb_host = "127.0.0.1:8086"
 bucket = "admin"
 org = "c9d2f82bec384031"
 token = "YY7AtGmBB5uAAcgdEP5G0u34dqbbmEYmr7-ZgOEG4spK_6l9XMThk7HQckSQVWwD7mGxKSLzcTqHXU8bGU5pow=="
+
+# PostgreSQL database configuration
+db_config = {
+    'host': 'localhost',
+    'database': 'postgres',
+    'user': 'postgres',
+    'password': 'admin',
+    'port': '5432'
+}
 
 app = Flask(__name__)
 
@@ -19,8 +29,9 @@ def skin(weaponType, skinName):
     # do przekazania ich do funkcji get_data() lub wykonywania innych operacji
 
     getchart = get_data(weaponType, skinName)
+    getpostgresdata = postgres_data(weaponType, skinName)
 
-    context = {'getchart': getchart}
+    context = {'getchart': getchart, 'getpostgresdata': getpostgresdata}
     return render_template('skin.html', **context)
 
 
@@ -92,8 +103,51 @@ def get_data(weaponType,skinName):
     new_json_data = json.dumps([[entry["time"], entry["value"]] for entry in json_data], indent=4)
     return(new_json_data)
 
+@app.route('/postgres_data', methods=['GET'])
+def postgres_data(weaponType,skinName):
+    split_text = skinName.split(" (")
+    skin_name = split_text[0]
+    wear_condition = split_text[1][:-1]  # Pomijamy ostatni znak, który jest nawiasem zamykającym
+
+    # Connect to the PostgreSQL database
+    conn = connect_to_postgres()
+    cursor = conn.cursor()
+
+    # Example query - replace with your own query
+    query = """
+    SELECT * FROM "Typ przedmiotu" 
+    WHERE "Typ przedmiotu" = "{weapon_type}" AND
+    "Stan zuzycia" = "{wear_condition}" AND
+    "Nazwa skorki" = "{skin_name}"
+    """
+    cursor.execute(query,({weaponType},{wear_condition},{skin_name}))
+    conn.commit()
+
+    # Fetch all rows from the result set
+    data = cursor.fetchone()
+
+    # Close the database connection
+    cursor.close()
+    conn.close()
+
+    return data
+
+def connect_to_postgres():
+    try:
+        connection = psycopg2.connect(
+            user="postgres",
+            password="admin",
+            host="localhost",
+            port="5432",
+            database="postgres"
+        )
+        return connection
+    except Exception as e:
+        print(f"Błąd połączenia z bazą danych: {e}")
+        return None
+
 if __name__ == '__main__':
-#print(get_data())
+    print(postgres_data('AWP','Asiimov (Battle-Scarred)'))
     pass
 
 app.run()
