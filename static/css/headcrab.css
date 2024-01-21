@@ -381,7 +381,6 @@ abbr[title] {
     position: fixed;
     top: 0;
     width: 100%;
-    height: var(--navbar-height);
     z-index: 10001;
     background-color: #000;
     user-select: none;
@@ -2980,4 +2979,40 @@ strong,
 
 .suggestions-list li:hover {
     background-color: #f0f0f0;
+}
+
+
+#searchInput {
+    width: 300px; /* Increase the width as needed */
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+#suggestionList {
+    list-style: none;
+    padding-top: 0;
+    margin: 50px 0 0 0;
+    position: absolute;
+    top: 0px;
+    z-index: 1;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    border-top: none;
+    background-color: #2f2f2f;
+}
+
+#suggestionList li {
+    cursor: pointer;
+}
+
+#suggestionList li:hover {
+    background-color: #3f3f3f;
+}
+#searchResults {
+    background-color: #2f2f2f;
+    color: #fff; /* Biały kolor napisów */
+    border-radius: 5px;
+    position: relative; /* Dodane */
+    clear: both; /* Dodane */
 }
