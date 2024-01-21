@@ -31,7 +31,7 @@ def get_steam_market_image(skin_name):
 
 
 # Konfiguracja InfluxDB
-influxdb_host = "127.0.0.1"
+influxdb_host = "127.0.0.1:8086"
 bucket = "admin"
 org = "c9d2f82bec384031"
 token = "YY7AtGmBB5uAAcgdEP5G0u34dqbbmEYmr7-ZgOEG4spK_6l9XMThk7HQckSQVWwD7mGxKSLzcTqHXU8bGU5pow=="
@@ -75,12 +75,14 @@ def fetch_suggestions_from_db(query):
 
 
 
-@app.route('/<weaponType>/<skinName>')
-def skin(weaponType, skinName):
-    # Tutaj możesz użyć wartości weaponType i skinName
-    # do przekazania ich do funkcji get_data() lub wykonywania innych operacji
+@app.route('/<skinName>')
+def skin(skinName):
+    texts = skinName.split(" | ")
+    weaponType = texts[0]
+    skinName = texts[1]
 
     getchart = get_data(weaponType, skinName)
+    #getskindata = skin_data_from_postgres(weaponType)
 
     context = {'getchart': getchart}
     return render_template('skin.html', **context)
@@ -152,6 +154,25 @@ def get_data(weaponType,skinName):
     json_data = json.loads(json_data)
     new_json_data = json.dumps([[entry["time"], entry["value"]] for entry in json_data], indent=4)
     return(new_json_data)
+
+def skin_data_from_postgres():
+    conn = connect_db()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT typ_skina, "nazwa_skorki", "stan_zuzycia"
+        FROM public.typ_przedmiotu
+        WHERE typ_skina ILIKE %s
+           OR "nazwa_skorki" ILIKE %s
+           OR "stan_zuzycia" ILIKE %s
+        LIMIT 10;
+    """, (f'%{query}%', f'%{query}%', f'%{query}%'))
+
+    data = cursor.fetchall()
+    
+    conn.close()
+
+    return data
 
 if __name__ == '__main__':
     #db.create_all()
