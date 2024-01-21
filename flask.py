@@ -2,7 +2,9 @@ from datetime import datetime, timedelta
 import influxdb_client
 import pandas as pd
 from influxdb_client.client.write_api import SYNCHRONOUS
-from flask import Flask, render_template, jsonify
+from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, render_template, request, jsonify
+import psycopg2
 import json
 
 # Konfiguracja InfluxDB
@@ -12,6 +14,44 @@ org = "c9d2f82bec384031"
 token = "YY7AtGmBB5uAAcgdEP5G0u34dqbbmEYmr7-ZgOEG4spK_6l9XMThk7HQckSQVWwD7mGxKSLzcTqHXU8bGU5pow=="
 
 app = Flask(__name__)
+
+def connect_db():
+    connection = psycopg2.connect(
+        host="127.0.0.1",
+        user="postgres",
+        password="admin",
+        database="postgres"
+    )
+    return connection
+
+@app.route('/get_suggestions', methods=['GET'])
+def get_suggestions():
+    query = request.args.get('query', '')
+    suggestions = fetch_suggestions_from_db(query)
+    return jsonify(suggestions)
+
+def fetch_suggestions_from_db(query):
+    conn = connect_db()
+    cursor = conn.cursor()
+
+    # Użyj query, aby pobrać sugestie z bazy danych
+    cursor.execute("""
+        SELECT typ_skina, "Nazwa_skorki", "Stan_zuzycia"
+        FROM public.typ_przedmiotu
+        WHERE typ_skina ILIKE %s
+           OR "Nazwa_skorki" ILIKE %s
+           OR "Stan_zuzycia" ILIKE %s
+        LIMIT 10;
+    """, (f'%{query}%', f'%{query}%', f'%{query}%'))
+
+    suggestions = cursor.fetchall()
+    
+    conn.close()
+
+    return suggestions
+
+
+
 
 @app.route('/<weaponType>/<skinName>')
 def skin(weaponType, skinName):
@@ -34,12 +74,11 @@ def register():
 
 @app.route('/inventory')
 def inventory():
-    return render_template('../inventory.html')
+    return render_template('inventory.html')
 
 @app.route('/')
 def index():
     return render_template('index.html')
-
 
 @app.route('/get_data', methods=['GET'])
 def get_data(weaponType,skinName):
@@ -93,7 +132,8 @@ def get_data(weaponType,skinName):
     return(new_json_data)
 
 if __name__ == '__main__':
-#print(get_data())
+    #db.create_all()
+    #app.run(debug=True)
     pass
 
 app.run()
