@@ -7,6 +7,7 @@ import psycopg2
 import json
 import requests
 from bs4 import BeautifulSoup
+from werkzeug.security import generate_password_hash, check_password_hash
 
 # Skin IMG
 def get_steam_market_image(skin_name):
@@ -100,8 +101,42 @@ def skin(skinName):
 def login():
     return render_template('login.html')
 
-@app.route('/register')
-def register():
+@app.route('/register', methods=['GET', 'POST'])
+def register_user():
+    if request.method == 'POST':
+        nazwa = request.form.get('username')
+        email = request.form.get('email')
+        password = request.form.get('password')
+        password_confirm = request.form.get('password_confirm')
+
+        # Check if passwords match
+        if password != password_confirm:
+            return "Hasła się nie zgadzają!"
+
+        # Hash the password before storing it
+        hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
+
+
+        # Insert data into the database
+        conn = connect_db()
+        cursor = conn.cursor()
+
+        try:
+            cursor.execute("""
+                INSERT INTO uzytkownik (nazwa, email, haslo, zweryfikowany)
+                VALUES (%s, %s, %s, %s);
+            """, (nazwa, email, hashed_password, False))
+
+            conn.commit()
+            return render_template('login.html')
+
+        except Exception as e:
+            conn.rollback()
+            return f"Błąd podczas rejestracji: {e}"
+
+        finally:
+            conn.close()
+
     return render_template('register.html')
 
 @app.route('/inventory')
