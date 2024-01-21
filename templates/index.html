@@ -45,32 +45,6 @@
             </div>
             <div id="searchResults"></div>
 
-            <script>
-
-                function displaySuggestions(suggestions) {
-                    var suggestionList = document.getElementById('suggestionList');
-                    suggestionList.innerHTML = '';
-
-                    if (suggestions.length === 0) {
-                        suggestionList.innerHTML = '<li>No suggestions found</li>';
-                        return;
-                    }
-
-                    suggestions.forEach(suggestion => {
-                        var li = document.createElement('li');
-                        li.textContent = `${suggestion[0]} - ${suggestion[1]} - ${suggestion[2]}`;
-                        li.addEventListener('click', function () {
-                            document.getElementById('searchInput').value = li.textContent;
-                            suggestionList.innerHTML = '';
-                        });
-                        suggestionList.appendChild(li);
-                    });
-                }
-
-            </script>
-
-
-
             <a href="/inventory">Inventory</a>
             <a href="/">Charts</a>
         </div>
