@@ -65,7 +65,7 @@ input{
     align-items: center;
     justify-content: space-between;
     padding: 15px;
-}
+}/*
 .header{
     height: 200px;
     border-radius: 3px;
@@ -79,7 +79,7 @@ input{
     font-size: 40px;
     font-weight: bold;
     color: white;
-}
+}*/
 #root{
     margin-top: 60px;
     z-index: -1;
