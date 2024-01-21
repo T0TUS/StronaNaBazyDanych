@@ -39,14 +39,21 @@ token = "YY7AtGmBB5uAAcgdEP5G0u34dqbbmEYmr7-ZgOEG4spK_6l9XMThk7HQckSQVWwD7mGxKSL
 app = Flask(__name__)
 
 def connect_db():
-    connection = psycopg2.connect(
-        host="127.0.0.1",
-        user="postgres",
-        password="admin",
-        database="postgres",
-        port="5432"
-    )
-    return connection
+    try:
+        connection = psycopg2.connect(
+            host="127.0.0.1",
+            user="postgres",
+            password="admin",
+            database="postgres",
+            port="5432"
+        )
+        return connection
+    except psycopg2.Error as e:
+        # Print or log the error message
+        print(f"Error connecting to the database: {e}")
+        # Optionally, raise the exception to propagate it further
+        raise
+
 
 @app.route('/get_suggestions', methods=['GET'])
 def get_suggestions():
@@ -85,7 +92,7 @@ def skin(skinName):
     getchart = get_data(weaponType, skinName)
     getdatafrompostgres = skin_data_from_postgres(weaponType,skinName)
 
-    context = {'getchart': getchart}
+    context = {'getchart': getchart, 'getskindata': getdatafrompostgres}
     return render_template('skin.html', **context)
 
 
