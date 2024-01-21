@@ -2,7 +2,6 @@ from datetime import datetime, timedelta
 import influxdb_client
 import pandas as pd
 from influxdb_client.client.write_api import SYNCHRONOUS
-from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, render_template, request, jsonify
 import psycopg2
 import json

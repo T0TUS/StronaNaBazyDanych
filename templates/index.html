@@ -12,6 +12,7 @@
     <link rel="preload" href="{{ url_for('static', filename='fonts/Inter-Regular.woff2') }}" as="font" type="font/woff2" crossorigin="">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/headcrab.css') }}">
+    <script src="{{ url_for('static', filename='js/search.js') }}"></script>
 
     <meta name="description" content="SkinDB is a database of skins in CS2.">
     <meta property="og:description" content="SkinDB is a database of skins in CS2.">
@@ -35,20 +36,12 @@
 
             <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-            <form class="header-search" id="js-header-form" method="get" action="/search/" itemprop="potentialAction"
-                itemscope="" itemtype="http://schema.org/SearchAction" role="search">
-                <input type="hidden" name="a" value="all">
-                <meta itemprop="target" content="https://steamdb.info/search/?a=all&amp;q={q}">
-                <div class="search-container">
-                    <input type="text" accesskey="/" class="field" autocomplete="off" name="q" placeholder="Search…"
-                        itemprop="query-input" aria-label="Search" id="searchInput">
-                    <button type="button" class="submit" aria-label="Perform search" tabindex="-1"
-                        onclick="performSearch()">
-                        <svg width="16" height="16" viewBox="0 0 16 16" class="octicon octicon-search"
-                            aria-hidden="true"></svg>
-                    </button>
-                </div>
-            </form>
+            <div class="search-container">
+                <input type="text" id="search-bar" placeholder="Search...">
+                <ul class="suggestions-list" id="suggestions-list"></ul>
+            </div>
+        
+            
 
 
 
