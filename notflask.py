@@ -5,9 +5,33 @@ from influxdb_client.client.write_api import SYNCHRONOUS
 from flask import Flask, render_template, request, jsonify
 import psycopg2
 import json
+import requests
+from bs4 import BeautifulSoup
+
+# Skin IMG
+def get_steam_market_image(skin_name):
+    # Zamień spację w nazwie skórki na '%20' i przygotuj URL
+    encoded_skin_name = skin_name.replace(' ', '%20')
+    encoded_skin_name = skin_name.replace('|', '%7C')
+    market_url = f'https://steamcommunity.com/market/listings/730/{encoded_skin_name}'
+
+    # Wyślij żądanie do strony Steam Market
+    response = requests.get(market_url)
+    if response.status_code == 200:
+        # Parsuj HTML przy użyciu BeautifulSoup
+        soup = BeautifulSoup(response.text, 'html.parser')
+        
+        # Znajdź div z klasą "market_listing_largeimage" i pobierz link do zdjęcia
+        image_div = soup.find('div', {'class': 'market_listing_largeimage'})
+        if image_div:
+            image_url = image_div.find('img')['src']
+            return image_url
+
+    return None
+
 
 # Konfiguracja InfluxDB
-influxdb_host = "127.0.0.1:8086"
+influxdb_host = "127.0.0.1"
 bucket = "admin"
 org = "c9d2f82bec384031"
 token = "YY7AtGmBB5uAAcgdEP5G0u34dqbbmEYmr7-ZgOEG4spK_6l9XMThk7HQckSQVWwD7mGxKSLzcTqHXU8bGU5pow=="
