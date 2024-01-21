@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/headcrab.css') }}">
     <script src="{{ url_for('static', filename='js/search.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/skiny.js') }}"></script>
 
     <meta name="description" content="SkinDB is a database of skins in CS2.">
     <meta property="og:description" content="SkinDB is a database of skins in CS2.">
@@ -84,16 +85,22 @@
                             <tbody>
                                 <tr class="app" data-appid="730" data-cache="1704407442">
                                     <td class="applogo">
-                                        <a href="/app/730/charts/" tabindex="-1" aria-hidden="true">
-                                            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/730/capsule_sm_120.jpg?t=1704407442"
-                                                alt="">
+                                        <a href="{{ skin_name }}" tabindex="-1" aria-hidden="true">
+                                            <!-- Zdjęcie skórki pobrane ze Steam Market (za pomocą odpowiednich funkcji) -->
+                                            <img src="{{ image_url }}" alt="{{ skin_name }} Image">
                                         </a>
                                     </td>
                                     <td>
-                                        <a>Counter-Strike 2</a>
+                                        <a>{{ skin_name }}</a>
                                     </td>
-                                    <td class="text-center tabular-nums green">1,078,328</td>
-                                    <td class="text-center tabular-nums">1,155,457</td>
+                                    <td class="text-center tabular-nums green">
+                                        <!-- Dodatkowe informacje, jeśli są potrzebne -->
+                                        1,078,328
+                                    </td>
+                                    <td class="text-center tabular-nums">
+                                        <!-- Dodatkowe informacje, jeśli są potrzebne -->
+                                        1,155,457
+                                    </td>
                                 </tr>
                                 <tr class="app" data-appid="570" data-cache="1705121801">
                                     <td class="applogo">
