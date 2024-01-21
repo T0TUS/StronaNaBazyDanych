@@ -33,7 +33,6 @@ def fetch_suggestions_from_db(query):
     conn = connect_db()
     cursor = conn.cursor()
 
-    # Użyj query, aby pobrać sugestie z bazy danych
     cursor.execute("""
         SELECT typ_skina, "Nazwa_skorki", "Stan_zuzycia"
         FROM public.typ_przedmiotu

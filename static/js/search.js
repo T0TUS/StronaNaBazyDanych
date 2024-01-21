@@ -1,47 +1,44 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const searchBar = document.getElementById("search-bar");
-    const suggestionsList = document.getElementById("suggestions-list");
+function getSuggestions() {
+    var query = document.getElementById('searchInput').value;
 
-    searchBar.addEventListener("input", function () {
-        const inputText = searchBar.value.toLowerCase();
-
-        // Here you can replace this array with data from your database
-        const suggestions = ["Option 1", "Option 2", "Option 3", "Option 4"];
-
-        // Clear previous suggestions
-        suggestionsList.innerHTML = "";
-
-        // Filter and display matching suggestions
-        const filteredSuggestions = suggestions.filter(function (suggestion) {
-            return suggestion.toLowerCase().includes(inputText);
+    fetch(`/get_suggestions?query=${query}`)
+        .then(response => response.json())
+        .then(data => {
+            displaySuggestions(data);
         });
+}
 
-        filteredSuggestions.forEach(function (suggestion) {
-            const li = document.createElement("li");
-            li.textContent = suggestion;
-            suggestionsList.appendChild(li);
+function displaySuggestions(suggestions) {
+    var suggestionList = document.getElementById('suggestionList');
+    suggestionList.innerHTML = '';
+
+    var searchResults = document.getElementById('searchResults');
+    searchResults.innerHTML = ''; // Wyczyszczenie poprzednich wyników
+
+    if (suggestions.length === 0) {
+        suggestionList.innerHTML = '<li>No suggestions found</li>';
+        return;
+    }
+
+    suggestions.forEach(suggestion => {
+        var li = document.createElement('li');
+        li.textContent = `${suggestion[0]} - ${suggestion[1]} - ${suggestion[2]}`;
+        li.addEventListener('click', function() {
+            document.getElementById('searchInput').value = li.textContent;
+            suggestionList.innerHTML = '';
         });
+        suggestionList.appendChild(li);
 
-        // Display or hide suggestions list based on input
-        if (inputText.length > 0 && filteredSuggestions.length > 0) {
-            suggestionsList.style.display = "block";
-        } else {
-            suggestionsList.style.display = "none";
-        }
+        // Dodaj wyniki do sekcji searchResults
+        var resultDiv = document.createElement('div');
+        resultDiv.textContent = `${suggestion[0]} - ${suggestion[1]} - ${suggestion[2]}`;
+        searchResults.appendChild(resultDiv);
     });
+}
 
-    // Handle suggestion click
-    suggestionsList.addEventListener("click", function (event) {
-        if (event.target.tagName === "LI") {
-            searchBar.value = event.target.textContent;
-            suggestionsList.style.display = "none";
-        }
-    });
-
-    // Hide suggestions when clicking outside the search container
-    document.addEventListener("click", function (event) {
-        if (!event.target.closest(".search-container")) {
-            suggestionsList.style.display = "none";
-        }
-    });
+document.addEventListener('click', function(event) {
+    var suggestionList = document.getElementById('suggestionList');
+    if (!event.target.closest('.search-container')) {
+        suggestionList.innerHTML = '';
+    }
 });

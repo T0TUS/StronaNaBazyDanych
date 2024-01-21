@@ -7,9 +7,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SteamDB</title>
-    <link rel="preload" href="{{ url_for('static', filename='fonts/Inter-Italic.woff2') }}" as="font" type="font/woff2" crossorigin="">
-    <link rel="preload" href="{{ url_for('static', filename='fonts/Inter-Bold.woff2') }}" as="font" type="font/woff2" crossorigin="">
-    <link rel="preload" href="{{ url_for('static', filename='fonts/Inter-Regular.woff2') }}" as="font" type="font/woff2" crossorigin="">
+    <link rel="preload" href="{{ url_for('static', filename='fonts/Inter-Italic.woff2') }}" as="font" type="font/woff2"
+        crossorigin="">
+    <link rel="preload" href="{{ url_for('static', filename='fonts/Inter-Bold.woff2') }}" as="font" type="font/woff2"
+        crossorigin="">
+    <link rel="preload" href="{{ url_for('static', filename='fonts/Inter-Regular.woff2') }}" as="font" type="font/woff2"
+        crossorigin="">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/headcrab.css') }}">
     <script src="{{ url_for('static', filename='js/search.js') }}"></script>
@@ -37,11 +40,34 @@
             <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
             <div class="search-container">
-                <input type="text" id="search-bar" placeholder="Search...">
-                <ul class="suggestions-list" id="suggestions-list"></ul>
+                <input type="text" id="searchInput" oninput="getSuggestions()">
+                <ul id="suggestionList"></ul>
             </div>
-        
-            
+            <div id="searchResults"></div>
+
+            <script>
+
+                function displaySuggestions(suggestions) {
+                    var suggestionList = document.getElementById('suggestionList');
+                    suggestionList.innerHTML = '';
+
+                    if (suggestions.length === 0) {
+                        suggestionList.innerHTML = '<li>No suggestions found</li>';
+                        return;
+                    }
+
+                    suggestions.forEach(suggestion => {
+                        var li = document.createElement('li');
+                        li.textContent = `${suggestion[0]} - ${suggestion[1]} - ${suggestion[2]}`;
+                        li.addEventListener('click', function () {
+                            document.getElementById('searchInput').value = li.textContent;
+                            suggestionList.innerHTML = '';
+                        });
+                        suggestionList.appendChild(li);
+                    });
+                }
+
+            </script>
 
 
 
