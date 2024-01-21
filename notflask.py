@@ -43,7 +43,8 @@ def connect_db():
         host="127.0.0.1",
         user="postgres",
         password="admin",
-        database="postgres"
+        database="postgres",
+        port="5432"
     )
     return connection
 
@@ -82,7 +83,7 @@ def skin(skinName):
     skinName = texts[1]
 
     getchart = get_data(weaponType, skinName)
-    #getskindata = skin_data_from_postgres(weaponType)
+    getdatafrompostgres = skin_data_from_postgres(weaponType,skinName)
 
     context = {'getchart': getchart}
     return render_template('skin.html', **context)
@@ -155,18 +156,31 @@ def get_data(weaponType,skinName):
     new_json_data = json.dumps([[entry["time"], entry["value"]] for entry in json_data], indent=4)
     return(new_json_data)
 
-def skin_data_from_postgres():
+def skin_data_from_postgres(weaponType, skinName):
+    czesci_stanu = skinName.split("(")
+
+    # Usuń dodatkowe białe znaki
+    czesci_stanu = [czesc.strip(" )") for czesc in czesci_stanu]
+
+    # Zastąp ")" pustym ciągiem w drugiej części
+    czesci_stanu[1] = czesci_stanu[1].replace(")", "")
+
+    # Wynik
+    skinName = czesci_stanu[0]
+    stan = czesci_stanu[1]
+
+
     conn = connect_db()
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT typ_skina, "nazwa_skorki", "stan_zuzycia"
+        SELECT "typ_skina", "nazwa_skorki", "stan_zuzycia"
         FROM public.typ_przedmiotu
-        WHERE typ_skina ILIKE %s
-           OR "nazwa_skorki" ILIKE %s
-           OR "stan_zuzycia" ILIKE %s
+        WHERE "typ_skina" = %s
+           OR "nazwa_skorki" = %s
+           OR "stan_zuzycia" = %s
         LIMIT 10;
-    """, (f'%{query}%', f'%{query}%', f'%{query}%'))
+    """, (f'%{weaponType}%', f'%{skinName}%', f'%{stan}%'))
 
     data = cursor.fetchall()
     
