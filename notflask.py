@@ -34,11 +34,11 @@ def fetch_suggestions_from_db(query):
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT typ_skina, "Nazwa_skorki", "Stan_zuzycia"
+        SELECT typ_skina, "nazwa_skorki", "stan_zuzycia"
         FROM public.typ_przedmiotu
         WHERE typ_skina ILIKE %s
-           OR "Nazwa_skorki" ILIKE %s
-           OR "Stan_zuzycia" ILIKE %s
+           OR "nazwa_skorki" ILIKE %s
+           OR "stan_zuzycia" ILIKE %s
         LIMIT 10;
     """, (f'%{query}%', f'%{query}%', f'%{query}%'))
 
